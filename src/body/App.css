@@ -1,0 +1,149 @@
+
+
+.AI-VERSE {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* vertical center */
+  justify-content: center; /* horizontal center */
+  height: 100vh;         /* full screen height */
+  width: 100%;
+  
+  font-size: 200px;
+  color: #7AF201;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 0;
+   /* text-shadow:
+    0 0 5px #7AF201,
+    0 0 10px #7AF201,
+    0 0 20px #7AF201,
+    0 0 40px #7AF201; */
+}
+.creator-h1{
+   color: #7AF201;
+   font-size: 250px;
+   padding-left: 40px;
+}
+.AI-VERSE span {
+  display: inline-block;
+}
+.AI-VERSE .line{
+  display: block;
+}
+.WARNING{
+  color: #11190C;
+  font-size: 250px;
+  padding-left: 40px;
+}
+.warning{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.swiper-h1{
+   color: #7AF201;
+   font-size: 250px;
+   padding-left: 40px;
+}
+.h1-04{
+  display: flex;
+  color: #11190C;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 70px;
+}
+.note{
+  font-size: 20px;
+  color: #7AF201;
+}
+.USER-H1{
+    color: #7AF201;
+   font-size: 250px;
+   padding-left: 40px;
+}
+.warning-h1{
+   color: #11190C;
+   font-size: 50px;
+}
+.warning-li{
+ text-align: center;
+      margin-top: 16px;
+  font-size: 20px;
+  color: #11190c;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.creator-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+     color: #7AF201;
+}
+.creator-p{
+  font-size: 20px;
+  color: #7AF201;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+padding-top: 20px;
+padding-bottom: 20px;
+}
+.warning-two{
+  padding-top: 20px;
+   color: #11190C;
+   font-size: 60px;
+    display: flex;
+  align-items: center;   /* vertical center */
+  justify-content: center; /* horizontal center */
+
+}
+/* 🧭 Tablet (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .AI-VERSE {
+    font-size: 120px;
+    padding-top: 20px;
+  }
+}
+
+/* 📱 Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  .AI-VERSE {
+    font-size: 70px;
+    padding-top: 15px;
+  }
+  .WARNING{
+    font-size: 150px;
+  }
+  .warning-h1{
+    padding-top: 40px;
+font-size: 40px;
+  }
+  .warning-li{
+   color: #11190C;
+   font-size: 30px;
+}
+.warning-two{
+   color: #11190C;
+   font-size: 50px;
+    display: flex;
+  align-items: center;   /* vertical center */
+  justify-content: center; /* horizontal center */
+
+}
+.h1-04{
+  font-size: 30px;
+}
+}
+
+/* 📱 Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .AI-VERSE {
+    font-size: 45px;
+    padding-top: 10px;
+  }
+}

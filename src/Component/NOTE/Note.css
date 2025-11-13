@@ -1,0 +1,22 @@
+.marquee-container {
+  width: 100%;
+  overflow: hidden; /* hide overflowing content */
+  background-color: #11190C;
+  border-top: 2px solid #7AF201;
+  border-bottom: 2px solid #7AF201;
+  padding: 10px 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 50px; /* spacing between notes */
+  white-space: nowrap;
+}
+
+.note {
+  color: #7AF201;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  flex-shrink: 0; /* prevent shrinking */
+}

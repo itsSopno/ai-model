@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+
+
+.loader-container {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-text {
+     font-family: "Caesar Dressing", system-ui;
+  text-transform: uppercase;
+ 
+  letter-spacing: 0.2em;
+  transition: all 0.3s ease;
+}

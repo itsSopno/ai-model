@@ -1,0 +1,19 @@
+.publish-h1{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 70px;
+}
+.publish-form{
+     display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.form-era{
+      justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: aqua;
+}

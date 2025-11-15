@@ -8,7 +8,7 @@ The app allows users to view, manage, and store AI model–related data seamless
 
 ## 🌐 Live Links
 
-- **Frontend (Client):** [https://cheery-modelt-ecc2d2.netlify.app](https://cheery-modelt-ecc2d2.netlify.app)
+- **Frontend (Client):** [ai-model-jalebi-fb0e82.netlify.app](https://ai-model-jalebi-fb0e82.netlify.app)
 - **Backend (Server):** [https://server-3-3f0uy85j7-nabils-projects-9b9745ef.vercel.app](https://server-3-3f0uy85j7-nabils-projects-9b9745ef.vercel.app)
 
 ---

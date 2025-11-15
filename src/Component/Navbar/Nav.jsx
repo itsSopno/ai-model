@@ -55,6 +55,10 @@ const Nav = () => {
                 <li><Link to="Profile">Profile</Link></li>
                 <li><Link to="Publish">Publish Ai</Link></li>
                 <li><button onClick={handleLogout}>Logout</button></li>
+                 
+           <li><Link to="my-model"> MY-MODEL</Link></li>
+           <li><Link to = "buyer-app">PURCHASED APP </Link></li>
+        
               </>
             ) : (
               <li><Link to="login">Login</Link></li>
@@ -104,6 +108,12 @@ const Nav = () => {
               <motion.li whileHover={{ scale: 1.15, color: "#f53156" }}>
                 <button onClick={handleLogout}>Logout</button>
               </motion.li>
+                 <motion.li whileHover={{ scale: 1.15, color: "#7AF201" }}>
+            <Link to="my-model"> MY-MODEL</Link>
+          </motion.li>
+       <motion.li whileHover={{ scale: 1.15, color: "#7AF201" }}>
+         <Link to = "buyer-app">PURCHASED APP </Link>
+          </motion.li>
             </>
           ) : (
             <motion.li whileHover={{ scale: 1.15, color: "#7AF201" }}>
@@ -117,6 +127,7 @@ const Nav = () => {
           <motion.li whileHover={{ scale: 1.15, color: "#7AF201" }}>
             <Link to="MODEL">MODEL</Link>
           </motion.li>
+       
         </ul>
       </div>
     </motion.nav>

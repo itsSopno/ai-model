@@ -8,6 +8,9 @@ import Useri from "../Component/usercard/User";
 import Note from "../Component/NOTE/Note";
 import Loading from "../Component/Loading/loading";
 import "./App.css";
+import { Link } from "react-router";
+import Model from "../Component/Model/Model";
+import About from "../Component/About us/About";
 
 function Body() {
   const { user,} = useContext(AuthContext);
@@ -77,6 +80,20 @@ function Body() {
         duration: 1.2,
         ease: "power3.out",
       });
+     
+gsap.from(".service-card", {
+  scrollTrigger: {
+    trigger: ".service-card",
+    start: "top 90%",
+    toggleActions: "play none none reverse",
+  },
+  opacity: 0,
+  y: 80,
+  duration: 1.4,
+  ease: "power3.out",
+  stagger: 0.2,
+});
+
       gsap.from(".section-three p", {
         scrollTrigger: { trigger: ".section-three", start: "top 75%" },
         opacity: 0,
@@ -122,15 +139,15 @@ function Body() {
 
   return (
     <>
-      <section className="w-full h-screen bg-[#11190C] flex justify-center items-center text-center">
+      <section className="w-full h-screen  flex justify-center items-center text-center "   >
         <LenisScroll />
         <motion.h1
-          className="AI-VERSE font-bold text-5xl sm:text-6xl md:text-8xl leading-tight text-[#7AF201]"
+          className="AI-VERSE font-bold text-5xl sm:text-6xl md:text-8xl leading-tight text-[#92afcf]"
           variants={container}
           initial="hidden"
           animate="show"
         >
-          <motion.span style={{ display: "block" }}>
+          <motion.span style={{ display: "block", color: "var(--text)" }}>
             {"WELCOME TO".split("").map((c, i) => (
               <motion.span key={i} variants={charVariant}>
                 {c}
@@ -148,21 +165,25 @@ function Body() {
       </section>
 
      
-      <section className="section-two w-full min-h-screen bg-[#7AF201] rounded-tl-4xl rounded-tr-4xl px-8 py-16">
-        <h1 className="text-[#11190C] text-[200px] font-extrabold">01</h1>
+      <section className="section-two w-full min-h-screen bg-[#92afcf] rounded-tl-4xl rounded-tr-4xl px-8 py-16  bg-no-repeat bg-center" 
+ >
+
+        <h1 className=" text-[200px] font-extrabold">01</h1>
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-[#11190C] text-[60px] md:text-[40px] font-bold">
-            AI Models: The Engine of Modern Intelligence
+          <h1 className=" text-[60px] md:text-[40px] font-bold">
+          History of Artificial Intelligence
           </h1>
-          <p className="text-[#11190C] text-[22px] md:text-[18px] max-w-4xl mt-6 text-center">
-            An AI model is a program trained on data to recognize patterns, make predictions, or generate content — it’s the brain that powers intelligent systems.
+          <p className=" text-[22px] md:text-[18px] max-w-4xl mt-6 text-center">
+          Artificial Intelligence (AI) is the creation of machines that can think, learn, and make decisions like humans. The term “Artificial Intelligence” was first coined by John McCarthy in 1956 at the Dartmouth Conference. Early AI focused on problem-solving and logical reasoning.
+
+AI research faced challenges during the AI winters due to limited computing power, but it revived in the 1990s with machine learning, neural networks, and big data. Today, AI powers virtual assistants, autonomous vehicles, recommendation systems, and healthcare tools, and continues to evolve toward more advanced human-like intelligence.
           </p>
         </div>
       </section>
 
     
-      <section className="section-three w-full bg-[#11190C] text-[#7AF201] px-8 py-16 rounded-tl-4xl rounded-tr-4xl">
-        <h1 className="text-[180px] font-extrabold text-[#7AF201]">02</h1>
+      <section className="section-three w-full  text-[#92afcf] px-8 py-16 rounded-tl-4xl rounded-tr-4xl">
+        <h1 className="text-[180px] font-extrabold ">02</h1>
         <h1 className="text-[40px] font-bold mb-6">
           The Evolution and Future of AI Models
         </h1>
@@ -173,24 +194,62 @@ function Body() {
       </section>
 
      
-      <section className="section-four w-full min-h-screen bg-[#7AF201] flex flex-col justify-center items-center text-center rounded-tl-4xl rounded-tr-4xl px-8">
-        <h1 className="text-[#11190C] text-[200px] md:text-[120px] font-extrabold mb-6">03</h1>
-        <h2 className="text-[#11190C] text-[36px] md:text-[28px] font-semibold mb-4">
-          The Future of AI: Creativity Meets Logic
-        </h2>
-        <p className="text-[#11190C] text-[22px] md:text-[18px] max-w-3xl leading-relaxed">
-          Every model you build becomes part of an intelligent ecosystem where humans and machines evolve together.
-        </p>
-      </section>
-
       
-      {user && (
-        <section className=" section-five w-full bg-[#11190C] rounded-tr-4xl rounded-tl-4xl py-16">
-          <h1 className="text-[180px] text-[#7AF201] font-extrabold">04</h1>
-          <h2 className="text-[#7AF201] text-[36px] mb-8">Created by You</h2>
-          <Useri />
+   <section className="section-four w-full h-auto pb-[50px] bg-[#92afcf] rounded-tl-4xl rounded-tr-4xl">
+  <h1 className=" text-[200px] md:text-[120px] font-extrabold mb-6">03</h1>
+
+  <div className="flex flex-col justify-center items-center text-center">
+    <h2 className="text-black text-[36px] md:text-[28px] font-semibold mb-10">
+      WHAT WE HAVE FOR YOU ?
+    </h2>
+
+    <div className="flex flex-wrap gap-12 justify-center">
+
+      {/* BUY CARD */}
+      <div className="cool-card service-card w-80">
+        <div className="cool-card-inner bg-white/20 backdrop-blur-xl border border-white/30 
+                        rounded-3xl p-8 shadow-xl transition-all hover:shadow-2xl">
+          <h1 className="text-4xl font-bold  mb-4">BUY</h1>
+          <ul className="space-y-3  font-medium">
+            <li>AI models in various categories</li>
+            <li>Check out free models</li>
+            <li>Search through verified models</li>
+            <li>Use models in your projects</li>
+            <li>24/7 support and documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* SELL CARD */}
+      <div className="cool-card service-card w-80">
+        <div className="cool-card-inner bg-white/20 backdrop-blur-xl border border-white/30
+                        rounded-3xl p-8 shadow-xl transition-all hover:shadow-2xl">
+          <h1 className="text-4xl font-bold  mb-4">SELL</h1>
+          <ul className="  font-medium">
+            <li>Train, upload and sell your models</li>
+            <li>Only 20% royalty rate</li>
+            <li>Showcase your portfolio</li>
+            <li>Analytics and insights</li>
+            <li>Marketing support</li>
+          </ul>
+          <Link to="login">LOGIN HERE</Link>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      {/* {user && ( */}
+        <section className=" section-five w-full  rounded-tr-4xl rounded-tl-4xl py-16">
+          <h1 className="text-[180px]  font-extrabold">04</h1>
+          {user ? (<> <h2 className=" text-center text-[60px] mb-8">CREATED BY YOU</h2>
+          <Useri /> </>) : (<Model></Model>)}
+          {/* <h2 className="text-[#92afcf] text-center text-[60px] mb-8">CREATED BY YOU</h2>
+          <Useri /> */}
         </section>
-      )}
+      {/* )} */}
+      <About></About>
     </>
   );
 }

@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
 .LOGO{
     padding-left: 5px;
-      font-family: "Caesar Dressing", system-ui;
+       font-family: "Roboto Slab", serif;;
   font-weight: 400;
   font-style: normal;
 }
 .navbar{
-     font-family: "Caesar Dressing", system-ui;
+      font-family: "Roboto Slab", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 10px;
-  color: #7AF201;
+  color: #92afcf;
 }
 .navbar-end{
-    color: #7AF201;
+    color: #92afcf;
 }

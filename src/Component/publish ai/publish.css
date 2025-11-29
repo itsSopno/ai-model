@@ -1,19 +1,14 @@
-.publish-h1{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    font-size: 70px;
+.label {
+  font-weight: bold;
 }
-.publish-form{
-     display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+
+input,
+textarea {
+  transition: .2s ease;
 }
-.form-era{
-      justify-content: center;
-    text-align: center;
-    align-items: center;
-    background-color: aqua;
+
+input:focus,
+textarea:focus {
+  transform: scale(1.03);
+  background: #e8ffb8 !important;
 }

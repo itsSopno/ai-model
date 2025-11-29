@@ -1,21 +1,22 @@
 .edit-container {
   min-height: 100vh;
-  background-color: #7af201;
+  
   padding: 40px 20px;
 }
 
 .user-h1 {
-  color: #11190c;
+  color: var(--text);
   font-size: 200px;
   font-weight: 900;
   line-height: 0.8;
   padding-left: 20px;
   user-select: none;
+  padding-top: 50px;
 }
 
 .user-h2 {
   font-size: 36px;
-  color: #11190c;
+  color: var(--text);
   text-align: center;
   font-weight: 600;
   margin-bottom: 20px;
@@ -32,7 +33,7 @@
   width: 100%;
   max-width: 400px;
   background-color: #11190c;
-  color: #7af201;
+  color: #92afcf;
   padding: 24px;
   border-radius: 16px;
   display: flex;
@@ -50,8 +51,8 @@
 .input,
 .textarea {
   background-color: #11190c;
-  border: 1px solid #7af201;
-  color: #7af201;
+  border: 1px solid #92afcf;
+  color: #92afcf;
   padding: 10px;
   border-radius: 8px;
   outline: none;
@@ -59,12 +60,12 @@
 
 .input:focus,
 .textarea:focus {
-  border-color: #c1ff72;
-  box-shadow: 0 0 5px #a8ff50;
+  border-color: #92afcf;
+  box-shadow: 0 0 5px #92afcf;
 }
 
 .update-btn {
-  background-color: #7af201;
+  background-color: #92afcf;
   color: #11190c;
   font-weight: 600;
   border: none;
@@ -75,7 +76,7 @@
 }
 
 .update-btn:hover {
-  background-color: #9aff55;
+  background-color: white;
   transform: translateY(-2px);
 }
 
@@ -85,6 +86,7 @@
     font-size: 120px;
     text-align: center;
     padding-left: 0;
+    padding-bottom: 30px;
   }
 
   .user-h2 {

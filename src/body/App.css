@@ -9,7 +9,7 @@
   width: 100%;
   
   font-size: 200px;
-  color: #7AF201;
+  color: #92afcf;
   text-align: center;
   font-weight: bold;
   padding-top: 0;
@@ -18,6 +18,12 @@
     0 0 10px #7AF201,
     0 0 20px #7AF201,
     0 0 40px #7AF201; */
+}
+.section-three{
+    color: var(--text)
+}
+.section-four{
+    color: var(--text)
 }
 .creator-h1{
    color: #7AF201;
@@ -42,8 +48,11 @@
   justify-content: center;
 
 }
+.section-five{
+    color: var(--text)
+}
 .swiper-h1{
-   color: #7AF201;
+   color: #92afcf;
    font-size: 250px;
    padding-left: 40px;
 }
@@ -57,10 +66,10 @@
 }
 .note{
   font-size: 20px;
-  color: #7AF201;
+    color: var(--text)
 }
 .USER-H1{
-    color: #7AF201;
+    color: #92afcf;
    font-size: 250px;
    padding-left: 40px;
 }
@@ -82,11 +91,11 @@
   justify-content: center;
   align-items: center;
   font-size: 50px;
-     color: #7AF201;
+     color: #92afcf;
 }
 .creator-p{
   font-size: 20px;
-  color: #7AF201;
+  color: #92afcf;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,6 +111,23 @@ padding-bottom: 20px;
   justify-content: center; /* horizontal center */
 
 }
+.section-two{
+   color: var(--text);
+}
+.cool-card {
+  perspective: 1000px;
+   color: var(--text);
+}
+
+.cool-card-inner {
+  transition: all 0.35s ease;
+  transform-style: preserve-3d;
+}
+
+.cool-card:hover .cool-card-inner {
+  transform: rotateY(8deg) rotateX(8deg) scale(1.04);
+}
+
 /* 🧭 Tablet (max-width: 1024px) */
 @media (max-width: 1024px) {
   .AI-VERSE {

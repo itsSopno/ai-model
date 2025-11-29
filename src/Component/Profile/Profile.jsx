@@ -10,8 +10,8 @@ const Profile = () => {
   return (
     <section className="py-10 pt-[100px]">
       {user ? (
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 bg-[#11190c] backdrop-blur-md border border-green-800 rounded-2xl shadow-2xl overflow-hidden p-6">
-             <h1 className='text-[#7AF201] text-xl font-semibold flex justify-center **text-center**'>{user.displayName}</h1>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10  backdrop-blur-md border border-white rounded-2xl shadow-2xl overflow-hidden p-6">
+             <h1 className='text-[#92afcf] text-xl font-semibold flex justify-center **text-center**'>{user.displayName}</h1>
           {/* User Image */}
           <div className="flex items-center justify-center bg-gray-100/5 rounded-xl">
        

@@ -6,10 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+   background-color: var(--bg);
 }
 
 .loader-text {
-     font-family: "Caesar Dressing", system-ui;
+      font-family: "Roboto Slab", serif;
   text-transform: uppercase;
  
   letter-spacing: 0.2em;

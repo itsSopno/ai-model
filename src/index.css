@@ -1,9 +1,28 @@
 @import "tailwindcss";
 @plugin "daisyui";
-@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake;
+}
 :root{
-  font-family: "Caesar Dressing", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #11190c;
+     font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  color-scheme: dark;
+}
+html {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html.dark {
+  --bg: black;
+ --text: white;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+html.light {
+  --bg: #ffffff;
+  --text: black;
+  background-color: var(--bg);
+  color: var(--text);
 }

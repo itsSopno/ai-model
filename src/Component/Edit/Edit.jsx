@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useParams } from "react-router";
 import Swal from "sweetalert2";
 import { gsap } from "gsap";
 import "./edit.css";
+import { AuthContext } from "../../Authcontext";
 
 const EditModel = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const EditModel = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const formRef = useRef(null);
-
+const {theme} = useContext(AuthContext)
   //  Fetch data
   useEffect(() => {
     fetch(`https://server-3-smoky.vercel.app/users/${id}`)
@@ -67,45 +68,51 @@ const EditModel = () => {
 
   return (
     <div ref={sectionRef} className="edit-container">
-      <h1 ref={headingRef} className="user-h1">05</h1>
+      <h1 ref={headingRef} className="user-h1 ">06</h1>
 
       <div className="edit-main">
-        <h2 className="user-h2">You can edit your model data</h2>
+        <h2 className="user-h2">YOU CAN EDIT YOUR MODEL DATA</h2>
 
         <form
           ref={formRef}
           onSubmit={handleUpdate}
           className="edit-form"
+          required
         >
           <input
             defaultValue={model.name}
             name="name"
             placeholder="Name"
             className="input"
+            required
           />
           <input
             defaultValue={model.image}
             name="image"
             placeholder="Image"
             className="input"
+            required
           />
           <input
             defaultValue={model.useCase}
             name="useCase"
             placeholder="Use Case"
             className="input"
+            required
           />
           <input
             defaultValue={model.dataset}
             name="dataset"
             placeholder="Dataset"
             className="input"
+            required
           />
           <textarea
             defaultValue={model.description}
             name="description"
             placeholder="Description"
             className="textarea"
+            required
           ></textarea>
 
           <button className="update-btn">Update</button>

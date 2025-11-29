@@ -9,8 +9,8 @@ import Publish from '../Component/publish ai/publish';
 import PrivateRout from '../privaterout';
 import EditModel from '../Component/Edit/Edit';
 import ModelDetail from '../Component/ModelCard/Modeldetail';
-import Useri from '../Component/usercard/User';
 import Purchased from '../Component/purchased/purchased';
+import Model2nd from '../Component/2nd model/Model2nd';
 
 const Router = createBrowserRouter([
     {
@@ -20,7 +20,7 @@ const Router = createBrowserRouter([
       { index: true, element: <Body /> },
       { path: "MODEL", element: <Model />},
       { path: "MODEL/:id", element:<ModelDetail></ModelDetail>},
-{path:"my-model", element:<Useri></Useri> },
+{path:"my-model", element:<Model2nd></Model2nd> },
 {path:"buyer-app" , element:<Purchased></Purchased>},
       { path: "Profile", element: <PrivateRout><Profile /></PrivateRout> },
       { path: "login", element: <Login /> },

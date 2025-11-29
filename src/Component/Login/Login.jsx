@@ -3,7 +3,7 @@ import { AuthContext } from '../../Authcontext';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import auth from '../../firebase.init'; // Make sure your Firebase config is imported
 import { useNavigate } from 'react-router';
-
+import { Link } from 'react-router';
 const Login = () => {
   const { setUser, createUser } = useContext(AuthContext);
 const navigate = useNavigate(null)
@@ -58,18 +58,19 @@ const navigate = useNavigate(null)
   };
 
   return (
- <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#11190c] gap-9 px-4 md:px-8">
-      <h2 className=" text-8xl md:text-8xl me font-sans text-[#7af201] mb-10 uppercase tracking-wide text-center">
+    <>
+ <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#black] gap-9 px-4 md:px-8">
+      <h2 className=" text-8xl md:text-8xl me font-sans text-[#92afcf] mb-10 uppercase tracking-wide text-center">
         AI VERSE
       </h2>
 
-      <fieldset className="bg-[#7af201] border-base-300 rounded-box w-full max-w-sm border p-6 shadow-md text-[#11190c]">
+      <fieldset className="bg-[#92afcf] border-base-300 rounded-box w-full max-w-sm border p-6 shadow-md text-[#11190c]">
         <form onSubmit={handleEmailLogin} className="flex flex-col gap-3">
           <label className="label">Email</label>
-          <input type="email" name="email" className="input input-bordered  bg-[#7af201]" required />
+          <input type="email" name="email" className="input input-bordered  bg-[#92afcf]" required />
 
           <label className="label">Password</label>
-          <input type="password" name="password" className="input input-bordered bg-[#7af201]" required />
+          <input type="password" name="password" className="input input-bordered bg-[#92afcf]" required />
 
           <button type="submit" className="btn btn-neutral mt-4 rounded-tr-4xl rounded-tl-4xl">
             Login
@@ -85,6 +86,7 @@ const navigate = useNavigate(null)
         </button>
       </fieldset>
     </div>
+    </>
   );
 };
 

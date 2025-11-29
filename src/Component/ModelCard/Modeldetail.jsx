@@ -104,9 +104,9 @@ const ModelDetail = () => {
   return (
     <section
          ref={card}
-         className="min-h-screen py-20 bg-[#11190c] flex items-center justify-center"
+         className="min-h-screen py-20 flex items-center justify-center"
        >
-         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 bg-[#11190c] backdrop-blur-md border border-green-800 rounded-2xl shadow-2xl overflow-hidden p-6">
+         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 bg-[#11190c] backdrop-blur-md border border-[#92afcf] rounded-2xl shadow-2xl overflow-hidden p-6">
            <div className="flex items-center justify-center bg-gray-100/5 rounded-xl">
              <img
                ref={imgRef}
@@ -116,21 +116,21 @@ const ModelDetail = () => {
              />
            </div>
    
-           <div className="flex flex-col justify-center text-[#4af201] p-4">
+           <div className="flex flex-col justify-center text-[#92afcf] p-4">
              <h2
                ref={titleRef}
-               className="text-4xl md:text-5xl font-bold text-green-400 mb-4"
+               className="text-4xl md:text-5xl font-bold text-[#92afcf] mb-4"
              >
                {model.name}
              </h2>
    
-             <p ref={descRef} className="text-[#4af201] mb-4 text-lg">
+             <p ref={descRef} className="text-[#92afcf] mb-4 text-lg">
                {model.useCase}
              </p>
    
-             <p className="text-[#4af201] mb-6">{model.description}</p>
+             <p className="text-[#92afcf] mb-6">{model.description}</p>
    
-             <ul ref={listRef} className="list-disc pl-6 space-y-2 text-[#4af201]">
+             <ul ref={listRef} className="list-disc pl-6 space-y-2 text-[#92afcf]">
                <li>Framework: {model.framework}</li>
                <li>Created By: {model.createdBy}</li>
                <li>Dataset: {model.dataset}</li>

@@ -1,9 +1,8 @@
 .marquee-container {
   width: 100%;
   overflow: hidden; /* hide overflowing content */
-  background-color: #11190C;
-  border-top: 2px solid #7AF201;
-  border-bottom: 2px solid #7AF201;
+  border-top: 2px solid #92afcf;
+  border-bottom: 2px solid #92afcf;
   padding: 10px 0;
 }
 
@@ -14,7 +13,7 @@
 }
 
 .note {
-  color: #7AF201;
+   color: var(--text);
   font-weight: bold;
   font-size: 1.2rem;
   text-transform: uppercase;

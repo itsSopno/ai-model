@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 body{
-  font-family: "Caesar Dressing", system-ui;
+   font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
+  
  .meet-experts {
   /* padding: 100px 20px 40px; */
   text-align: center;

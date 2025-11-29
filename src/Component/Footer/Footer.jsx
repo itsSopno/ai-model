@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 const Footer = () => {
     const {user} = useContext(AuthContext)
     return (
-       <footer className="footer footer-horizontal footer-center bg-[#11190c] text-[#7af201] rounded p-10">
+       <footer className="footer footer-horizontal footer-center bg-transparent text-[#92afcf] rounded p-10">
   <nav className="grid grid-flow-col gap-4">
    <ul className='flex gap-10'>
       {user ? (

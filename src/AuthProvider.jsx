@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   const [buyerdata, setBuyerData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [buyerLoading, setBuyerLoading] = useState(true);
-
+ const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -54,7 +54,9 @@ const AuthProvider = ({ children }) => {
     modelData,
     loading,
     buyerdata,
-    buyerLoading
+    buyerLoading,
+    theme,
+    setTheme
   };
 
   return (

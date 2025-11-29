@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../Authcontext';
-import './user.css';
 
-const Useri = () => {
+
+const Model2nd = () => {
   const { user, modelData } = useContext(AuthContext);
 
   if (!user?.email) {
@@ -20,7 +20,7 @@ const Useri = () => {
 
   return (
     <section className="meet-experts py-16 px-6">
-
+ <h2 className="text-[#92afcf] text-center text-[60px] mb-8">CREATED BY YOU</h2>
       <div className="expert-cards grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {userModels.length > 0 ? (
           userModels.map((expert) => (
@@ -39,7 +39,10 @@ const Useri = () => {
               <p className="expert-title text-gray-300 italic mb-3 text-center">
                 {expert.useCase}
               </p>
-            
+              <p className="expert-descriptioni text-[#11190c] text-center mb-5">
+                {expert.description}
+              </p>
+
               <div className="flex gap-4 flex-wrap justify-center">
                 <Link
                   to={`/MODEL/${expert._id}`}
@@ -69,4 +72,4 @@ const Useri = () => {
   );
 };
 
-export default Useri;
+export default Model2nd;

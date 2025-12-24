@@ -8,7 +8,7 @@ The app allows users to view, manage, and store AI model–related data seamless
 
 ## 🌐 Live Links
 
-- **Frontend (Client):** [final-draft-42ca56.netlify.app](https://final-draft-42ca56.netlify.app/)
+- **Frontend (Client):** [rainbow-cobbler-1f634f.netlify.app](https://rainbow-cobbler-1f634f.netlify.app/)
 - **Backend (Server):** [https://server-3-3f0uy85j7-nabils-projects-9b9745ef.vercel.app](https://server-3-3f0uy85j7-nabils-projects-9b9745ef.vercel.app)
 
 ---

@@ -12,20 +12,27 @@ import ModelDetail from "../Component/ModelCard/Modeldetail";
 import Purchased from "../Component/purchased/purchased";
 import Model2nd from "../Component/2nd model/Model2nd";
 import NotFound from "../Component/error page/Nothing";
+import Register from "../Component/Registration/Register";
+
+
+const ErrorWrapper = () => <NotFound />;
+
 const Router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorWrapper />,
     children: [
-      { index: true, element: <Body /> },
-      { path: "MODEL", element: <PrivateRout><Model /></PrivateRout> },
-      { path: "MODEL/:id", element:<PrivateRout><ModelDetail /></PrivateRout> },
-      { path: "my-model", element:<PrivateRout><Model2nd /></PrivateRout> },
-      { path: "buyer-app", element: <Purchased /> },
-      { path: "Profile", element: <PrivateRout><Profile /></PrivateRout> },
-      { path: "login", element: <Login /> },
-      { path: "Publish", element: <PrivateRout><Publish /></PrivateRout> },
-      { path: "edit/:id", element: <PrivateRout><EditModel /></PrivateRout> },
+      { index: true, element: <Body />, errorElement: <ErrorWrapper /> },
+      { path: "MODEL", element: <Model />, errorElement: <ErrorWrapper /> },
+      { path: "MODEL/:id", element: <PrivateRout><ModelDetail /></PrivateRout>, errorElement: <ErrorWrapper /> },
+      { path: "my-model", element: <PrivateRout><Model2nd /></PrivateRout>, errorElement: <ErrorWrapper /> },
+      { path: "buyer-app", element: <Purchased />, errorElement: <ErrorWrapper /> },
+      { path: "Profile", element: <PrivateRout><Profile /></PrivateRout>, errorElement: <ErrorWrapper /> },
+      { path: "login", element: <Login />, errorElement: <ErrorWrapper /> },
+      { path: "register", element: <Register />, errorElement: <ErrorWrapper /> },
+      { path: "Publish", element: <PrivateRout><Publish /></PrivateRout>, errorElement: <ErrorWrapper /> },
+      { path: "edit/:id", element: <PrivateRout><EditModel /></PrivateRout>, errorElement: <ErrorWrapper /> },
       { path: "*", element: <NotFound /> }, 
     ],
   },

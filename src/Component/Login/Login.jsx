@@ -1,113 +1,140 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Authcontext';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import auth from '../../firebase.init'; // Make sure your Firebase config is imported
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router';
+import { useNavigate, Link, useLocation } from 'react-router';
+import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Login = () => {
-  const { setUser, createUser } = useContext(AuthContext);
-const navigate = useNavigate(null)
+  const { loginUser, loginWithGoogle, theme } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleEmailLogin = async (e) => {
     e.preventDefault();
-
     const email = e.target.email.value;
     const password = e.target.password.value;
 
+    setLoading(true);
     try {
-      // Firebase Email/Password Signup
-      const userCredential = await createUser(email, password);
-      setUser(userCredential.user);
-      console.log("Firebase User Created:", userCredential.user);
-
-      // Send email + password to backend
-      const newUser = { email, password };
-      const response = await fetch('https://server-3-smoky.vercel.app/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser)
-      });
-      const result = await response.json();
-      console.log("Saved to backend:", result);
-      navigate("/")
-    } catch (error) {
-      console.error("Error:", error);
+      await loginUser(email, password);
+      toast.success("Login successful!");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Login failed!");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setLoading(true);
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      setUser(user);
-      console.log("Google User:", user);
-
-      // Optionally send Google user info to your backend
-      const newUser = { email: user.email, name: user.displayName, uid: user.uid, photo:user.photoURL };
-      const response = await fetch('https://server-3-smoky.vercel.app/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' , authorization : `Bearer ${newUser.accessToken}`},
-        body: JSON.stringify(newUser)
-      });
-      const backendResult = await response.json();
-      console.log("Saved Google user to backend:", backendResult);
-      navigate("/")
-    } catch (error) {
-      console.error("Google login error:", error); 
+      await loginWithGoogle();
+      toast.success("Google login successful!");
+      navigate(from, { replace: true });
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Google login failed!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <>
- <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#black] gap-9 px-4 md:px-8">
-      <h2 className=" text-8xl md:text-8xl me font-sans text-[#92afcf] mb-10 uppercase tracking-wide text-center">
-        AI VERSE
-      </h2>
+    <motion.section
+      className={`min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 ${
+        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+      }`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <motion.h2
+        className={`text-6xl md:text-8xl font-bold uppercase ${
+          theme === "dark" ? "text-[#92afcf]" : "text-indigo-600"
+        }`}
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        AI Verse
+      </motion.h2>
 
-      <fieldset className="bg-[#92afcf] border-base-300 rounded-box w-full max-w-sm border p-6 shadow-md text-[#11190c]">
-        <form onSubmit={handleEmailLogin} className="flex flex-col gap-3">
-          <label className="label">Email</label>
-          <input type="email" name="email" className="input input-bordered  bg-[#92afcf]" required />
+      <motion.fieldset
+        className={`rounded-lg w-full max-w-sm p-6 shadow-lg ${
+          theme === "dark" ? "bg-gray-800 text-white" : "bg-gray-100 text-black"
+        }`}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        <form onSubmit={handleEmailLogin} className="flex flex-col gap-4">
+          <label>Email</label>
+          <input
+            name="email"
+            type="email"
+            className="p-3 rounded-lg border outline-none"
+            required
+          />
 
-          <label className="label">Password</label>
-          <input type="password" name="password" className="input input-bordered bg-[#92afcf]" required />
+          <label>Password</label>
+          <input
+            name="password"
+            type="password"
+            className="p-3 rounded-lg border outline-none"
+            required
+          />
 
-          <button type="submit" className="btn btn-neutral mt-4 rounded-tr-4xl rounded-tl-4xl">
-            Login
+          <button
+            className={`mt-4 p-3 rounded-lg font-semibold ${
+              theme === "dark"
+                ? "bg-indigo-500 hover:bg-indigo-600"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            } transition`}
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
         <button
           onClick={handleGoogleLogin}
-          type="button"
-          className="btn btn-outline mt-4 w-full rounded-br-4xl rounded-bl-4xl"
+          className={`mt-4 w-full p-3 rounded-lg border font-semibold ${
+            theme === "dark"
+              ? "border-red-500 text-red-500 hover:bg-red-600 hover:text-white"
+              : "border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+          } transition`}
+          disabled={loading}
         >
-          Continue with Google
+          {loading ? "Please wait..." : "Continue with Google"}
         </button>
-      </fieldset>
-    </div>
-    </>
+
+        <div className="mt-4 text-center">
+          <Link
+            to="/forgot-password"
+            className="text-sm underline hover:text-indigo-400"
+          >
+            Forgot Password?
+          </Link>
+        </div>
+
+        <p className="mt-2 text-center text-sm">
+          New here?{" "}
+          <Link
+            to="/register"
+            className="font-semibold underline hover:text-indigo-500"
+          >
+            Create an account
+          </Link>
+        </p>
+      </motion.fieldset>
+    </motion.section>
   );
 };
 
 export default Login;
-
-{/* <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-[#11190c] relative gap-9 px-4 md:px-8">
-      <h2 className=" text-8xl md:text-8xl font text-[#7af201] mb-10 uppercase me">
-        AI VERSE
-      </h2>
-
-      <fieldset className="bg-[#7AF201] max-w-sm w-full p-6 rounded shadow text-[#11190c]">
-        <form onSubmit={handleLogin} className="flex flex-col gap-3">
-          <label>Email</label>
-          <input type="email" name="email" className="input input-bordered" required />
-
-          <label>Password</label>
-          <input type="password" name="password" className="input input-bordered" required />
-
-          <button type="submit" className="btn btn-neutral mt-4">
-            Login
-          </button>
-        </form>
-      </fieldset>
-    </div> */}

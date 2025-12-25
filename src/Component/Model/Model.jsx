@@ -82,7 +82,7 @@ const Model = () => {
           onChange={e => setFramework(e.target.value)}
           className="p-3 w-full max-w-xs rounded-xl
                      bg-white/5 backdrop-blur
-                     text-black border border-black/10"
+                     text-[#92afcf] border border-black/10"
         >
           {frameworks.map(fw => (
             <option key={fw} value={fw}>{fw}</option>

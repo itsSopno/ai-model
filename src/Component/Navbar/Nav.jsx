@@ -5,7 +5,7 @@ import { AuthContext } from '../../Authcontext';
 import './Nav.css';
 
 const Nav = () => {
-  const { user, logout, theme, setTheme } = useContext(AuthContext);
+  const { user, logout, theme, setTheme, modelData } = useContext(AuthContext);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
@@ -39,6 +39,10 @@ const Nav = () => {
 
   const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
 
+  // ✅ Plan logic: check if user has models
+  const hasMyModel =
+    user && modelData?.some(model => model.createdBy === user.email);
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -55,7 +59,9 @@ const Nav = () => {
           <ul className={`hidden lg:flex menu menu-horizontal gap-6 text-lg font-semibold ${theme === "dark" ? "text-[#92afcf]" : "text-[#11190C]"}`}>
             <motion.li whileHover={{ scale: 1.15 }}><Link to="Profile">PROFILE</Link></motion.li>
             <motion.li whileHover={{ scale: 1.15 }}><Link to="Publish">PUBLISH AI</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>
+            {hasMyModel && (
+              <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>
+            )}
             <motion.li whileHover={{ scale: 1.15 }}><Link to="buyer-app">PURCHASED APP</Link></motion.li>
             <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
           </ul>
@@ -74,7 +80,7 @@ const Nav = () => {
               <>
                 <li><Link to="Profile">Profile</Link></li>
                 <li><Link to="Publish">Publish AI</Link></li>
-                <li><Link to="my-model">My Model</Link></li>
+                {hasMyModel && <li><Link to="my-model">My Model</Link></li>}
                 <li><Link to="buyer-app">Purchased App</Link></li>
                 <li><Link to="MODEL">MODEL</Link></li>
                 <li><button onClick={handleLogout}>Logout</button></li>
@@ -112,6 +118,7 @@ const Nav = () => {
           {user ? (
             <>
               <motion.li whileHover={{ scale: 1.15 }}><button onClick={handleLogout}>LOGOUT</button></motion.li>
+              {hasMyModel && <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>}
               <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
             </>
           ) : (

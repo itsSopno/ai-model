@@ -11,6 +11,7 @@ import "./App.css";
 import { Link } from "react-router";
 import Model from "../Component/Model/Model";
 import About from "../Component/About us/About";
+import HomeSections from "../Component/House/HomeSections";
 
 function Body() {
   const { user,} = useContext(AuthContext);
@@ -164,7 +165,9 @@ gsap.from(".service-card", {
         </motion.h1>
       </section>
 
-     
+     <section>
+      <HomeSections></HomeSections>
+     </section>
       <section className="section-two w-full min-h-screen bg-[#92afcf] rounded-tl-4xl rounded-tr-4xl px-8 py-16  bg-no-repeat bg-center" 
  >
 
@@ -244,7 +247,7 @@ AI research faced challenges during the AI winters due to limited computing powe
         <section className=" section-five w-full  rounded-tr-4xl rounded-tl-4xl py-16">
           <h1 className="text-[180px]  font-extrabold">04</h1>
           {user ? (<> <h2 className=" text-center text-[60px] mb-8">CREATED BY YOU</h2>
-          <Useri /> </>) : (<Model></Model>)}
+          <Useri /> </>) : ( <h2 className=" text-center text-[60px] mb-8">PLEASE LOGIN FIRST</h2>)}
           {/* <h2 className="text-[#92afcf] text-center text-[60px] mb-8">CREATED BY YOU</h2>
           <Useri /> */}
         </section>

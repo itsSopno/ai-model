@@ -5,11 +5,13 @@ import { AuthContext } from '../../Authcontext';
 import './Nav.css';
 
 const Nav = () => {
-  const { user, logout, theme, setTheme } = useContext(AuthContext);
+  const { user, logout,theme,setTheme } = useContext(AuthContext);
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
-  // Theme effect
+  // THEME STATE
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
   useEffect(() => {
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
@@ -21,7 +23,6 @@ const Nav = () => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll);
@@ -57,7 +58,6 @@ const Nav = () => {
             <motion.li whileHover={{ scale: 1.15 }}><Link to="Publish">PUBLISH AI</Link></motion.li>
             <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>
             <motion.li whileHover={{ scale: 1.15 }}><Link to="buyer-app">PURCHASED APP</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
           </ul>
         )}
 
@@ -69,27 +69,24 @@ const Nav = () => {
             </svg>
           </div>
 
-          <ul tabIndex="-1" className={`menu menu-sm dropdown-content rounded-box mt-3 w-56 p-2 shadow ${theme === "dark" ? "bg-[#11190C] text-white" : "bg-[#92afcf] text-[#11190C]"}`}>
+          <ul tabIndex="-1" className={`menu menu-sm dropdown-content rounded-box mt-3 w-56 p-2 shadow ${theme === "dark" ? "bg-[#11190C] text-[white]" : "bg-[#92afcf] text-[#11190C]"}`}>
             {user ? (
               <>
                 <li><Link to="Profile">Profile</Link></li>
-                <li><Link to="Publish">Publish AI</Link></li>
+                <li><Link to="Publish">Publish Ai</Link></li>
                 <li><Link to="my-model">My Model</Link></li>
                 <li><Link to="buyer-app">Purchased App</Link></li>
-                <li><Link to="MODEL">MODEL</Link></li>
+                    <li><Link to="MODEL">MODEL</Link></li>
                 <li><button onClick={handleLogout}>Logout</button></li>
               </>
             ) : (
-              <>
-                <li><Link to="login">Login</Link></li>
-                <li><Link to="/">Home</Link></li>
-              </>
+              <li><Link to="login">Login</Link></li>
             )}
-            <li>
-              <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition w-full text-center ${theme === "dark" ? "border-[#92afcf] text-[#92afcf] hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
-                {theme === "dark" ? "Light Mode" : "Dark Mode"}
-              </button>
-            </li>
+            <li><Link to="/">Home</Link></li>
+           
+               <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition ${theme === "dark" ? "border-[#92afcf] text-[#92afcf] hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
+          {theme === "dark" ? "Light Mode" : "Dark Mode"}
+        </button>
           </ul>
         </div>
       </div>
@@ -104,20 +101,20 @@ const Nav = () => {
 
       {/* RIGHT */}
       <div className="navbar-end hidden lg:flex gap-6 items-center">
-        <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition ${theme === "dark" ? "border-[#92afcf] text-white hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
+        {/* Theme Toggle */}
+        <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition ${theme === "dark" ? "border-[#92afcf] text-[white] hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
           {theme === "dark" ? "Light Mode" : "Dark Mode"}
         </button>
 
         <ul className="menu menu-horizontal px-1 flex gap-6 text-lg ">
           {user ? (
-            <>
-              <motion.li whileHover={{ scale: 1.15 }}><button onClick={handleLogout}>LOGOUT</button></motion.li>
-              <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
-            </>
+            <motion.li whileHover={{ scale: 1.15 }}><button onClick={handleLogout}>LOGOUT</button></motion.li>
+             <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
           ) : (
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="login">Login</Link></motion.li>
+            <motion.li whileHover={{ scale: 1.15 }}><Link to="login">LOGIN</Link></motion.li>
           )}
           <motion.li whileHover={{ scale: 1.15 }}><Link to="/">HOME</Link></motion.li>
+       
         </ul>
       </div>
     </motion.nav>

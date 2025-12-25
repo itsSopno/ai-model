@@ -1,0 +1,103 @@
+
+.meet-experts {
+  width: 100%;
+  height: auto; /* <-- এখানে auto রাখো */
+  padding: 100px 20px 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+     font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  font-style: normal;
+    color: var(--text)
+}
+
+
+/* Title styling */
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-style: normal;
+    color: var(--text)
+}
+
+/* Expert cards container */
+.expert-cards {
+  display: grid;
+  justify-content: center;
+  gap: 30px;
+  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+  grid-template-columns: repeat(5 , 1fr);
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Individual expert card styling */
+.expert-card {
+  background-color: #92afcf;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.expert-card:hover {
+  transform: scale(1.05);
+}
+
+/* Image styling for expert profile */
+.expert-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+/* Name of the expert */
+.expert-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #11190c;
+  margin-bottom: 5px;
+}
+
+/* Title under the expert name */
+.expert-title {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* Description for each expert */
+.expert-description {
+  font-size: 14px;
+  color: #11190c;
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .meet-experts {
+    padding-top: 80px; 
+  .section-title {
+    font-size: 28px;
+  }
+
+  .expert-cards {
+    grid-template-columns: 2fr;
+  }
+
+  .expert-card {
+    width: 100%;
+  }
+}
+}

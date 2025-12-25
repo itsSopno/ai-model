@@ -1,0 +1,14 @@
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.buuu{
+    padding-top: 30px;
+    gap: 30px;
+    display: flex;
+}
+/* .bu{
+    padding-left: 30px;
+} */

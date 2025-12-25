@@ -1,0 +1,14 @@
+.label {
+  font-weight: bold;
+}
+
+input,
+textarea {
+  transition: .2s ease;
+}
+
+input:focus,
+textarea:focus {
+  transform: scale(1.03);
+  background: #e8ffb8 !important;
+}

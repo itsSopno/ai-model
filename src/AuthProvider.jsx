@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
         if (!res.ok) throw new Error("Failed to fetch buyer data");
         const data = await res.json();
         setBuyerData(data);
-        toast.success("Buyer data loaded successfully!");
+      
       } catch (err) {
         toast.error(err.message || "Error loading buyer data");
       } finally {
@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
         if (!res.ok) throw new Error("Failed to fetch models");
         const data = await res.json();
         setModelData(data);
-        toast.success("Model data loaded successfully!");
+      
       } catch (err) {
         toast.error(err.message || "Error loading models");
       } finally {

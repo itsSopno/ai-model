@@ -8,7 +8,7 @@ const Model2nd = () => {
 
   if (!user?.email) {
     return (
-      <section className="w-full min-h-screen flex items-center justify-center px-4 bg-gray-900 text-white">
+      <section className="w-full min-h-screen flex items-center justify-center px-4  text-white">
         <h2 className="text-2xl md:text-3xl font-semibold">
           Please login to view your models.
         </h2>
@@ -39,7 +39,7 @@ const Model2nd = () => {
   };
 
   return (
-    <section className={`py-16 px-6 min-h-screen ${theme === 'dark' ? 'bg-[#11190C]' : 'bg-gray-100'}`}>
+    <section className={`py-16 px-6 min-h-screen ${theme === 'dark' ? '' : ''}`}>
       <h2 className={`text-center text-4xl md:text-5xl font-bold mb-12 ${theme === 'dark' ? 'text-[#92afcf]' : 'text-gray-800'}`}>
         CREATED BY YOU
       </h2>

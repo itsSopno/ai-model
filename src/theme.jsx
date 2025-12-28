@@ -1,100 +1,173 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../Authcontext";
-import { Link } from "react-router";
-import { motion } from "framer-motion";
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from "framer-motion";
+import { AuthContext } from '../../Authcontext';
 
-const HomeSections = () => {
-  const { modelData } = useContext(AuthContext);
+const Nav = () => {
+  const { user, logout, theme, setTheme, modelData } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const recentModels = modelData?.length
-    ? modelData
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .slice(0, 6)
-    : [];
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const cardVariant = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1 },
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
+  const handleLogout = async () => { 
+    await logout(); 
+    setIsOpen(false);
+    navigate('/'); 
   };
 
-  const sectionVariant = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0 },
+  const hasMyModel = user && modelData?.some(model => model.createdBy === user.email);
+
+  // Animation Variants
+  const menuVariants = {
+    initial: { clipPath: "circle(0% at 90% 10%)" },
+    animate: { 
+      clipPath: "circle(150% at 90% 10%)",
+      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+    },
+    exit: { 
+      clipPath: "circle(0% at 90% 10%)",
+      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+    }
+  };
+
+  const linkVariants = {
+    initial: { y: 80, opacity: 0 },
+    animate: i => ({ 
+      y: 0, 
+      opacity: 1, 
+      transition: { delay: 0.3 + i * 0.1, duration: 0.8, ease: "easeOut" } 
+    }),
   };
 
   return (
-    <div className="w-full">
-      {/* Featured AI Models */}
-      <section className="p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center">Featured AI Models</h2>
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2 }}
-          transition={{ staggerChildren: 0.15 }}
-        >
-          {recentModels.map((model) => (
-            <motion.div
-              key={model._id}
-              variants={cardVariant}
-              className="bg-gray-800 p-4 rounded-xl flex flex-col items-center hover:scale-105 transition-transform"
+    <>
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
+          scrolled && !isOpen
+            ? "bg-white/5 backdrop-blur-xl border-b border-white/10 py-3" 
+            : "bg-transparent py-6"
+        }`}
+      >
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+          
+          {/* LOGO */}
+          <Link to="/" onClick={() => setIsOpen(false)} className="text-2xl font-black tracking-tighter flex items-center gap-1 z-[101] mix-blend-difference text-white">
+            <span>AI</span>
+            <span className="text-indigo-500 italic font-light">VERSE</span>
+          </Link>
+
+          {/* RIGHT: TOGGLES */}
+          <div className="flex items-center gap-6 z-[101]">
+            <button onClick={toggleTheme} className="text-[10px] uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity mix-blend-difference text-white">
+              {theme === "dark" ? "Light" : "Dark"}
+            </button>
+
+            {/* HAMBURGER BUTTON */}
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="flex flex-col gap-1.5 justify-center items-center w-8 h-8"
             >
-              <Link to={`/MODEL/${model._id}`} className="flex flex-col items-center">
-                <img
-                  src={model.image || "/default-model.png"}
-                  alt={model.name}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 object-contain mb-2 rounded-lg"
-                />
-                <h3 className="text-indigo-400 font-semibold">{model.name}</h3>
-                <p className="text-gray-300 text-sm mt-1">{model.useCase}</p>
-                <p className="text-gray-400 text-xs mt-1">{model.framework}</p>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
+              <motion.span 
+                animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                className="w-full h-[2px] bg-white mix-blend-difference"
+              />
+              <motion.span 
+                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="w-full h-[2px] bg-white mix-blend-difference"
+              />
+              <motion.span 
+                animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                className="w-full h-[2px] bg-white mix-blend-difference"
+              />
+            </button>
+          </div>
+        </div>
+      </motion.nav>
 
-      {/* About AI Models */}
-      <motion.section
-        className="p-8 rounded-t-3xl mt-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        variants={sectionVariant}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-3xl font-bold mb-4 text-center">About AI Models</h2>
-        <p className="max-w-3xl mx-auto text-gray-300 text-center text-lg">
-          Explore a variety of AI models designed for different purposes – from natural language
-          processing to computer vision. Our platform provides up-to-date models with clear
-          use cases and framework details so you can integrate AI seamlessly into your projects.
-        </p>
-      </motion.section>
+      {/* FULL SCREEN OVERLAY */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            variants={menuVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed inset-0 bg-[#0a0a0a] text-white z-[99] flex flex-col justify-center px-10 md:px-32"
+          >
+            <div className="flex flex-col gap-4">
+              {[
+                { name: "Home", path: "/" },
+                { name: "All Models", path: "/MODEL" },
+                ...(user ? [
+                  { name: "My Profile", path: "/Profile" },
+                  { name: "Publish AI", path: "/Publish" },
+                  { name: "Library", path: "/buyer-app" },
+                ] : [
+                  { name: "Login", path: "/login" }
+                ])
+              ].map((link, i) => (
+                <div key={link.name} className="overflow-hidden">
+                  <motion.div
+                    custom={i}
+                    variants={linkVariants}
+                    initial="initial"
+                    animate="animate"
+                  >
+                    <Link 
+                      to={link.path} 
+                      onClick={() => setIsOpen(false)}
+                      className="text-5xl md:text-8xl font-black uppercase tracking-tighter hover:italic hover:text-indigo-500 transition-all duration-300 block"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                </div>
+              ))}
 
-      {/* Get Started */}
-      <motion.section
-        className="p-8 mt-12 text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        variants={sectionVariant}
-        transition={{ duration: 0.8, delay: 0.1 }}
-      >
-        <h2 className="text-3xl font-bold mb-6">Get Started</h2>
-        <p className="text-gray-300 max-w-2xl mx-auto mb-6">
-          Ready to explore AI models or integrate them into your project? Click below to start
-          browsing or create your own custom AI solutions.
-        </p>
-        <Link
-          to="/MODEL"
-          className="inline-block px-6 py-3 rounded-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold transition"
-        >
-          Explore Models
-        </Link>
-      </motion.section>
-    </div>
+              {user && (
+                <motion.button
+                  custom={5}
+                  variants={linkVariants}
+                  initial="initial"
+                  animate="animate"
+                  onClick={handleLogout}
+                  className="text-left text-2xl md:text-4xl font-light text-zinc-600 hover:text-red-500 transition-colors uppercase mt-10"
+                >
+                  [ Sign Out ]
+                </motion.button>
+              )}
+            </div>
+
+            {/* BOTTOM INFO */}
+            <div className="absolute bottom-12 left-10 md:left-32 flex flex-col md:flex-row gap-12 text-[10px] uppercase tracking-[0.4em] text-zinc-700">
+               <div>
+                 <p className="mb-2 text-indigo-500">Navigation</p>
+                 <p>© 2025 AI VERSE CORE</p>
+               </div>
+               <div>
+                 <p className="mb-2 text-indigo-500">Status</p>
+                 <p>{user ? `Logged in as ${user.email}` : "Guest Access"}</p>
+               </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
-export default HomeSections;
+export default Nav;

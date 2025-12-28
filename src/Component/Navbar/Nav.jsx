@@ -1,132 +1,125 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { motion } from "framer-motion";
+import { Link, useNavigate, useLocation } from 'react-router';
+import { motion, AnimatePresence } from "framer-motion";
 import { AuthContext } from '../../Authcontext';
-import './Nav.css';
 
 const Nav = () => {
   const { user, logout, theme, setTheme, modelData } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Theme effect
   useEffect(() => {
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    } else {
-      document.documentElement.classList.remove("light");
-      document.documentElement.classList.add("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  // Scroll effect
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/');
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
+  // Theme logic remains the same
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
+  const handleLogout = async () => { await logout(); navigate('/'); };
 
-  // ✅ Plan logic: check if user has models
-  const hasMyModel =
-    user && modelData?.some(model => model.createdBy === user.email);
+  const hasMyModel = user && modelData?.some(model => model.createdBy === user.email);
+
+  // Link Hover Animation logic
+  const linkClasses = `text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:text-indigo-500`;
 
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      className={`navbar fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? (theme === "dark" ? "bg-black/90" : "bg-white/90") : "bg-transparent"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
+        scrolled 
+          ? "bg-white/5 backdrop-blur-xl border-b border-white/10 py-3" 
+          : "bg-transparent py-6"
       }`}
     >
-      {/* LEFT */}
-      <div className="navbar-start flex items-center gap-6">
-        {/* Desktop Menu */}
-        {user && (
-          <ul className={`hidden lg:flex menu menu-horizontal gap-6 text-lg font-semibold ${theme === "dark" ? "text-[#92afcf]" : "text-[#11190C]"}`}>
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="Profile">PROFILE</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="Publish">PUBLISH AI</Link></motion.li>
-            {hasMyModel && (
-              <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>
-            )}
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="buyer-app">PURCHASED APP</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
-          </ul>
-        )}
-
-        {/* Mobile Dropdown */}
-        <div className="dropdown lg:hidden">
-          <div tabIndex={0} role="button" className="btn btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 ${theme === "dark" ? "text-[#92afcf]" : "text-[black]"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
-          </div>
-
-          <ul tabIndex="-1" className={`menu menu-sm dropdown-content rounded-box mt-3 w-56 p-2 shadow ${theme === "dark" ? "bg-[#11190C] text-white" : "bg-[#92afcf] text-[#11190C]"}`}>
-            {user ? (
-              <>
-                <li><Link to="Profile">Profile</Link></li>
-                <li><Link to="Publish">Publish AI</Link></li>
-                {hasMyModel && <li><Link to="my-model">My Model</Link></li>}
-                <li><Link to="buyer-app">Purchased App</Link></li>
-                <li><Link to="MODEL">MODEL</Link></li>
-                <li><button onClick={handleLogout}>Logout</button></li>
-              </>
-            ) : (
-              <>
-                <li><Link to="login">Login</Link></li>
-                <li><Link to="/">Home</Link></li>
-              </>
-            )}
-            <li>
-              <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition w-full text-center ${theme === "dark" ? "border-[#92afcf] text-[#92afcf] hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
-                {theme === "dark" ? "Light Mode" : "Dark Mode"}
-              </button>
-            </li>
-          </ul>
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+        
+        {/* LEFT: DESKTOP MENU */}
+        <div className="hidden lg:flex items-center gap-8">
+          {user && (
+            <>
+              <Link to="Profile" className={linkClasses}>Profile</Link>
+              <Link to="Publish" className={linkClasses}>Publish</Link>
+              <Link to="buyer-app" className={linkClasses}>Library</Link>
+            </>
+          )}
         </div>
-      </div>
 
-      {/* CENTER */}
-      <div className='navbar-center hidden md:flex'>
-        <motion.a whileHover={{ scale: 1.1, rotate: 2 }} transition={{ type: "spring", stiffness: 300 }}
-          className={`LOGO text-2xl font-extrabold cursor-pointer ${theme === "dark" ? "text-[#92afcf]" : "text-[#11190C]"}`}>
-          AI<span className={theme === "dark" ? "text-white" : "text-[#92afcf]"}>VERSE</span>
-        </motion.a>
-      </div>
+        {/* CENTER: LOGO */}
+        <div className="flex items-center">
+          <Link to="/" className="text-2xl font-black tracking-tighter flex items-center gap-1 group">
+            <span className="group-hover:italic transition-all">AI</span>
+            <span className="text-indigo-500 italic font-light">VERSE</span>
+          </Link>
+        </div>
 
-      {/* RIGHT */}
-      <div className="navbar-end hidden lg:flex gap-6 items-center">
-        <button onClick={toggleTheme} className={`px-3 py-1 rounded-full border transition ${theme === "dark" ? "border-[#92afcf] text-white hover:bg-[#92afcf] hover:text-black" : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"}`}>
-          {theme === "dark" ? "Light Mode" : "Dark Mode"}
-        </button>
-
-        <ul className="menu menu-horizontal px-1 flex gap-6 text-lg ">
+        {/* RIGHT: ACTIONS */}
+        <div className="hidden lg:flex items-center gap-8">
           {user ? (
             <>
-              <motion.li whileHover={{ scale: 1.15 }}><button onClick={handleLogout}>LOGOUT</button></motion.li>
-              {hasMyModel && <motion.li whileHover={{ scale: 1.15 }}><Link to="my-model">MY MODEL</Link></motion.li>}
-              <motion.li whileHover={{ scale: 1.15 }}><Link to="MODEL">MODEL</Link></motion.li>
+              <Link to="MODEL" className={linkClasses}>Models</Link>
+              {hasMyModel && <Link to="my-model" className={linkClasses}>Ownership</Link>}
+              <button onClick={handleLogout} className="text-[10px] px-4 py-2 border border-zinc-500/30 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-widest">
+                Logout
+              </button>
             </>
           ) : (
-            <motion.li whileHover={{ scale: 1.15 }}><Link to="login">Login</Link></motion.li>
+            <Link to="login" className={linkClasses}>Login</Link>
           )}
-          <motion.li whileHover={{ scale: 1.15 }}><Link to="/">HOME</Link></motion.li>
-        </ul>
+          
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={toggleTheme}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-500/10 hover:bg-zinc-500/20 transition-all border border-white/5"
+          >
+            {theme === "dark" ? "☼" : "☾"}
+          </button>
+        </div>
+
+        {/* MOBILE MENU TOGGLE */}
+        <button 
+          className="lg:hidden text-2xl" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? "✕" : "⠿"}
+        </button>
       </div>
+
+      {/* MOBILE MENU OVERLAY */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden absolute top-full left-0 w-full  backdrop-blur-3xl border-b border-white/10 px-8 py-12 flex flex-col gap-6"
+          >
+            {user ? (
+              <>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="Profile" className="text-3xl font-bold italic uppercase">Profile</Link>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="Publish" className="text-3xl font-bold italic uppercase">Publish</Link>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="MODEL" className="text-3xl font-bold italic uppercase">Models</Link>
+               <Link to="buyer-app" className={linkClasses}>Library</Link>
+                <button onClick={handleLogout} className="text-left text-red-500 font-bold uppercase tracking-widest text-sm">Sign Out</button>
+              </>
+            ) : (
+              <Link onClick={() => setIsMobileMenuOpen(false)} to="login" className="text-4xl font-bold">Login</Link>
+            )}
+            <div className="h-[1px] bg-white/10 my-4" />
+            <button onClick={toggleTheme} className="uppercase tracking-[0.3em] text-[10px]">
+              Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };

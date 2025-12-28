@@ -1,259 +1,176 @@
-import { useState, useEffect, useContext} from "react";
-import { motion } from "motion/react";
+import { useState, useEffect, useContext } from "react";
+import { motion } from "framer-motion"; 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LenisScroll from "../LenisScroll";
 import { AuthContext } from "../Authcontext";
-import Useri from "../Component/usercard/User";
 import Note from "../Component/NOTE/Note";
 import Loading from "../Component/Loading/loading";
-import "./App.css";
 import { Link } from "react-router";
-import Model from "../Component/Model/Model";
-import About from "../Component/About us/About";
 import HomeSections from "../Component/House/HomeSections";
+import Model2nd from "../Component/2nd model/Model2nd";
+import About from "../Component/About us/About";
 
 function Body() {
-  const { user,} = useContext(AuthContext);
-
-  
+  const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2800);
     return () => clearTimeout(timer);
   }, []);
 
-  // 🔹 GSAP animations
   useEffect(() => {
-    if (isLoading) return; 
-
+    if (isLoading) return;
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Section-two
-      gsap.from(".section-two", {
-        scrollTrigger: {
-          trigger: ".section-two",
-          start: "top 85%",
-          end: "bottom 60%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 150,
-        rotate: 3,
-        duration: 1.5,
-        ease: "power4.out",
-      });
-      gsap.from(".section-two h1", {
-        scrollTrigger: { trigger: ".section-two", start: "top 80%" },
-        opacity: 0,
-        y: 60,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-      });
-      gsap.from(".section-two p", {
-        scrollTrigger: { trigger: ".section-two", start: "top 75%" },
-        opacity: 0,
-        y: 80,
-        duration: 1.5,
-        ease: "power2.out",
-      });
-
-      // Section-three
-      gsap.from(".section-three", {
-        scrollTrigger: {
-          trigger: ".section-three",
-          start: "top 85%",
-          end: "bottom 60%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 100,
-        duration: 1.4,
-        ease: "power4.out",
-      });
-      gsap.from(".section-three h1", {
-        scrollTrigger: { trigger: ".section-three", start: "top 80%" },
-        opacity: 0,
-        x: -100,
-        duration: 1.2,
-        ease: "power3.out",
-      });
-     
-gsap.from(".service-card", {
-  scrollTrigger: {
-    trigger: ".service-card",
-    start: "top 90%",
-    toggleActions: "play none none reverse",
-  },
-  opacity: 0,
-  y: 80,
-  duration: 1.4,
-  ease: "power3.out",
-  stagger: 0.2,
-});
-
-      gsap.from(".section-three p", {
-        scrollTrigger: { trigger: ".section-three", start: "top 75%" },
-        opacity: 0,
-        x: 100,
-        duration: 1.5,
-        ease: "power3.out",
-      });
-
-      // Section-four
-      gsap.from(".section-four", {
-        scrollTrigger: {
-          trigger: ".section-four",
-          start: "top 85%",
-          end: "bottom 60%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 120,
-        scale: 0.95,
-        duration: 1.5,
-        ease: "power4.out",
-      });
-      gsap.from(".section-four h1, .section-four h2, .section-four p", {
-        scrollTrigger: { trigger: ".section-four", start: "top 80%" },
-        opacity: 0,
-        y: 60,
-        stagger: 0.2,
-        duration: 1.2,
-        ease: "back.out(1.7)",
+      // Smooth Reveal for all sections
+      gsap.utils.toArray("section").forEach((section) => {
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          ease: "power2.out",
+        });
       });
     });
-
     return () => ctx.revert();
   }, [isLoading]);
 
- 
-  const container = { hidden: {}, show: { transition: { staggerChildren: 0.05 } } };
+  const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
   const charVariant = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 500 } },
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+
   if (isLoading) return <Loading onComplete={() => setIsLoading(false)} />;
 
   return (
-    <>
-      <section className="w-full h-screen  flex justify-center items-center text-center "   >
-        <LenisScroll />
+    <main className="transition-colors duration-500 overflow-x-hidden font-sans">
+      <LenisScroll />
+
+      {/* Hero Section - Uses Neutral Gradients */}
+      <section className="relative w-full h-screen flex justify-center items-center text-center px-4 overflow-hidden">
+        {/* থিম সেফ গ্রাডিয়েন্ট: নীলচে আভা যা দুই থিমেই সুন্দর */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(99,102,241,0.1),transparent_70%)]" />
+        
         <motion.h1
-          className="AI-VERSE font-bold text-5xl sm:text-6xl md:text-8xl leading-tight text-[#92afcf]"
+          className="relative z-10 font-black text-6xl md:text-[10rem] tracking-tighter leading-none"
           variants={container}
           initial="hidden"
           animate="show"
         >
-          <motion.span style={{ display: "block", color: "var(--text)" }}>
-            {"WELCOME TO".split("").map((c, i) => (
-              <motion.span key={i} variants={charVariant}>
-                {c}
-              </motion.span>
-            ))}
+          <motion.span className="block text-zinc-500 uppercase text-xs tracking-[0.8em] mb-6 font-medium">
+            Intelligence Evolved
           </motion.span>
-          <motion.span style={{ display: "block" }}>
+          <div className="flex justify-center overflow-hidden italic">
             {"AI VERSE".split("").map((c, i) => (
-              <motion.span key={i} variants={charVariant}>
-                {c}
+              <motion.span key={i} variants={charVariant} className="inline-block">
+                {c === " " ? "\u00A0" : c}
               </motion.span>
             ))}
-          </motion.span>
+          </div>
         </motion.h1>
       </section>
 
-     <section>
-      <HomeSections></HomeSections>
-     </section>
-      <section className="section-two w-full min-h-screen bg-[#92afcf] rounded-tl-4xl rounded-tr-4xl px-8 py-16  bg-no-repeat bg-center" 
- >
+      <HomeSections />
 
-        <h1 className=" text-[200px] font-extrabold">01</h1>
-        <div className="flex flex-col items-center justify-center">
-          <h1 className=" text-[60px] md:text-[40px] font-bold">
-          History of Artificial Intelligence
-          </h1>
-          <p className=" text-[22px] md:text-[18px] max-w-4xl mt-6 text-center">
-          Artificial Intelligence (AI) is the creation of machines that can think, learn, and make decisions like humans. The term “Artificial Intelligence” was first coined by John McCarthy in 1956 at the Dartmouth Conference. Early AI focused on problem-solving and logical reasoning.
-
-AI research faced challenges during the AI winters due to limited computing power, but it revived in the 1990s with machine learning, neural networks, and big data. Today, AI powers virtual assistants, autonomous vehicles, recommendation systems, and healthcare tools, and continues to evolve toward more advanced human-like intelligence.
+      {/* Section 01: History - Using Neutral Slate */}
+      <section className="section-two relative w-full min-h-screen border-y border-zinc-200/10 px-8 py-32 flex flex-col justify-center">
+        <span className="absolute top-10 left-10 text-[12rem] md:text-[20rem] font-bold opacity-5 pointer-events-none italic">
+          01
+        </span>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-5xl md:text-7xl font-bold leading-tight tracking-tighter mb-8">
+              HISTORY OF <br /> <span className="text-indigo-500">AI MODELS</span>
+            </h2>
+            <div className="h-1 w-20 bg-indigo-500" />
+          </div>
+          <p className="text-lg md:text-xl text-zinc-500 leading-relaxed font-light">
+            Artificial Intelligence (AI) is the creation of machines that can think, learn, and make decisions like humans. Early AI focused on problem-solving and logical reasoning, now evolving toward advanced human-like intelligence.
           </p>
         </div>
       </section>
 
-    
-      <section className="section-three w-full  text-[#92afcf] px-8 py-16 rounded-tl-4xl rounded-tr-4xl">
-        <h1 className="text-[180px] font-extrabold ">02</h1>
-        <h1 className="text-[40px] font-bold mb-6">
-          The Evolution and Future of AI Models
-        </h1>
-        <Note />
-        <p className="max-w-4xl text-[20px]">
-          The AI revolution is shifting from simple classification models to generative systems, agentic AI, and a deep focus on Responsible AI.
-        </p>
+      {/* Section 02: Evolution - Glassmorphism (Theme Safe) */}
+      <section className="section-three w-full py-32 px-8">
+        <div className="max-w-5xl mx-auto bg-zinc-500/5 backdrop-blur-3xl rounded-[3rem] p-12 border border-zinc-500/10">
+          <h3 className="text-indigo-500 uppercase tracking-widest text-xs mb-6 font-bold">02 — Future Path</h3>
+          <h1 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight">
+            The Agentic Era
+          </h1>
+          <Note />
+          <p className="max-w-2xl text-xl text-zinc-500 mt-10 font-light">
+            The AI revolution is shifting from simple classification to generative systems and agentic AI with a deep focus on Responsibility.
+          </p>
+        </div>
       </section>
 
-     
-      
-   <section className="section-four w-full h-auto pb-[50px] bg-[#92afcf] rounded-tl-4xl rounded-tr-4xl">
-  <h1 className=" text-[200px] md:text-[120px] font-extrabold mb-6">03</h1>
+      {/* Section 03: Cards - Neutral Indigo & Slate */}
+      <section className="section-four w-full py-32 px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-center text-xs uppercase tracking-[0.5em] text-zinc-500 mb-20">Our Ecosystem</h2>
+          
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* BUY CARD - Lightly Tinted */}
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-indigo-500/5 p-12 rounded-[2.5rem] border border-indigo-500/10 hover:border-indigo-500/40 transition-all duration-500"
+            >
+              <h1 className="text-5xl font-black mb-6 group-hover:italic transition-all">BUY</h1>
+              <ul className="space-y-4 text-zinc-500 text-lg font-light">
+                {["Verified AI Models", "Developer Documentation", "24/7 Integration Support"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full" /> {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
 
-  <div className="flex flex-col justify-center items-center text-center">
-    <h2 className="text-black text-[36px] md:text-[28px] font-semibold mb-10">
-      WHAT WE HAVE FOR YOU ?
-    </h2>
-
-    <div className="flex flex-wrap gap-12 justify-center">
-
-      {/* BUY CARD */}
-      <div className="cool-card service-card w-80">
-        <div className="cool-card-inner bg-white/20 backdrop-blur-xl border border-white/30 
-                        rounded-3xl p-8 shadow-xl transition-all hover:shadow-2xl">
-          <h1 className="text-4xl font-bold  mb-4">BUY</h1>
-          <ul className="space-y-3  font-medium">
-            <li>AI models in various categories</li>
-            <li>Check out free models</li>
-            <li>Search through verified models</li>
-            <li>Use models in your projects</li>
-            <li>24/7 support and documentation</li>
-          </ul>
+            {/* SELL CARD - Neutral Zinc */}
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group bg-zinc-500/5 p-12 rounded-[2.5rem] border border-zinc-500/10 hover:border-zinc-500/40 transition-all duration-500"
+            >
+              <h1 className="text-5xl font-black mb-6 group-hover:italic transition-all">SELL</h1>
+              <ul className="space-y-4 text-zinc-500 text-lg font-light mb-8">
+                {["Train & Sell Models", "Only 20% Royalty", "Analytics Dashboard"].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full" /> {item}
+                  </li>
+                ))}
+              </ul>
+              <Link to="/login" className="inline-block px-8 py-3 bg-zinc-900 text-white dark:bg-white dark:text-black rounded-full font-bold text-sm uppercase tracking-widest transition-transform active:scale-95">
+                Join Network
+              </Link>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* SELL CARD */}
-      <div className="cool-card service-card w-80">
-        <div className="cool-card-inner bg-white/20 backdrop-blur-xl border border-white/30
-                        rounded-3xl p-8 shadow-xl transition-all hover:shadow-2xl">
-          <h1 className="text-4xl font-bold  mb-4">SELL</h1>
-          <ul className="  font-medium">
-            <li>Train, upload and sell your models</li>
-            <li>Only 20% royalty rate</li>
-            <li>Showcase your portfolio</li>
-            <li>Analytics and insights</li>
-            <li>Marketing support</li>
-          </ul>
-          <Link to="login">LOGIN HERE</Link>
+      {/* User Section */}
+      <section className="py-24 px-8 border-t border-zinc-200/10">
+        <div className="max-w-7xl mx-auto">
+          {user ? (
+            <Model2nd />
+          ) : (
+            <div className="text-center py-24 opacity-40">
+              <h2 className="text-2xl md:text-4xl font-light tracking-[0.3em] uppercase">Private Repository</h2>
+              <p className="mt-4 text-sm text-zinc-500 italic">Please login to view your workspace</p>
+            </div>
+          )}
         </div>
-      </div>
+      </section>
 
-    </div>
-  </div>
-</section>
-
-      {/* {user && ( */}
-        <section className=" section-five w-full  rounded-tr-4xl rounded-tl-4xl py-16">
-          <h1 className="text-[180px]  font-extrabold">04</h1>
-          {user ? (<> <h2 className=" text-center text-[60px] mb-8">CREATED BY YOU</h2>
-          <Useri /> </>) : ( <h2 className=" text-center text-[60px] mb-8">PLEASE LOGIN FIRST</h2>)}
-          {/* <h2 className="text-[#92afcf] text-center text-[60px] mb-8">CREATED BY YOU</h2>
-          <Useri /> */}
-        </section>
-      {/* )} */}
-      <About></About>
-    </>
+      <About />
+    </main>
   );
 }
 

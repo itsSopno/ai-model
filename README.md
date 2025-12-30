@@ -53,7 +53,7 @@ Follow these steps to run **AI Model Dashboard** on your local machine:
 
 ### Step 1: Clone the repository
 ```bash
-git clone https://github.com/itsSopno/ai-model-dashboard.git
+git clone https://github.com/itsSopno/ai-model.git
 cd ai-model
 npm install i
 npm install react-router

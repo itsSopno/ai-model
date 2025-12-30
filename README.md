@@ -1,4 +1,4 @@
-# 🚀 AI Model Dashboard
+# 🚀 AI-Verse
 
 ### 🧠 Short Description
 **AI Model Dashboard** is a full-stack web application that allows users to **view, manage, and store AI model–related data** efficiently. Built with **React, Framer Motion, GSAP, and Lenis** on the frontend, and **Node.js + Express + MongoDB + Firebase Admin** on the backend, it provides a smooth, responsive, and interactive SaaS-style interface.

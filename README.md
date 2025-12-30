@@ -54,4 +54,20 @@ Follow these steps to run **AI Model Dashboard** on your local machine:
 ### Step 1: Clone the repository
 ```bash
 git clone https://github.com/itsSopno/ai-model-dashboard.git
-cd ai-model-dashboard
+cd ai-model
+npm install i
+npm install react-router
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install daisyui
+npm install framer-motion
+npm install gsap
+npm install firebase
+npm i lenis
+
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_CLIENT_EMAIL=your_client_email
+FIREBASE_PRIVATE_KEY="your_private_key"
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+npm start

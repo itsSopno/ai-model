@@ -12,10 +12,8 @@
 
 ---
 
-## 🖥️ Dashboard Screenshot
-<p align="center">
-  <img src="assets/dashboard.png" width="800" alt="AI Model Dashboard Screenshot"/>
-</p>
+## 🖥️ Desgin Screenshot
+![Dashboard Screenshot](model-logo/ai-model.png)
 
 ---
 

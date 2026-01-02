@@ -103,43 +103,67 @@ const HomeSections = () => {
       </section>
 
       {/* 2. About AI Models - Clean Split Layout */}
-      <section className="py-24 px-6 border-t border-white/5">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
-            <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">
-              A New Era of <br /> <span className="text-indigo-500">AI Integration</span>
-            </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-            AI Verse isn't just a directory; it's a bridge between complex research and real-world application. 
-              We curate high-performance models, providing clear implementation paths so you can focus on building 
-              what matters most.
-            </p>
-            <div className="flex gap-4">
-              <div className="h-12 w-1 bg-indigo-500 rounded-full" />
-              <p className="text-sm italic text-gray-500">"The best way to predict the future is to invent it."</p>
-            </div>
-          </motion.div>
+    <section className="w-full py-24 px-6 md:px-16 border-t border-white/5 bg-[#doffoo]">
+  {/* Container: max-w সরিয়ে w-full করা হয়েছে */}
+  <div className="w-full grid lg:grid-cols-2 gap-12 lg:gap-32 items-center">
+    
+    {/* LEFT CONTENT */}
+    <motion.div 
+      initial="hidden" 
+      whileInView="visible" 
+      viewport={{ once: true }} 
+      variants={fadeIn}
+      className="space-y-8"
+    >
+      <div className="space-y-4">
+        <h2 className="text-indigo-500 font-black tracking-[0.4em] uppercase text-[10px]">
+          Operational Infrastructure
+        </h2>
+        <h2 className="text-5xl md:text-7xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
+          A New Era of <br /> 
+          <span className="text-[#d0ff00] italic font-light">AI Integration</span>
+        </h2>
+      </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { title: "Models", count: "200+" },
-              { title: "Latency", count: "<20ms" },
-              { title: "Uptime", count: "99.9%" },
-              { title: "Devs", count: "5K+" },
-            ].map((stat, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ scale: 1.05 }}
-                className="p-8 rounded-[2rem] bg-[#0a0c14] border border-white/5 text-center"
-              >
-                <div className="text-3xl font-black text-white mb-1">{stat.count}</div>
-                <div className="text-indigo-500 text-[10px] uppercase tracking-widest font-bold">{stat.title}</div>
-              </motion.div>
-            ))}
+      <p className="text-gray-500 text-lg md:text-xl leading-relaxed max-w-2xl">
+        AI Verse isn't just a directory; it's a bridge between complex research and real-world application. 
+        We curate high-performance models, providing clear implementation paths so you can focus on building 
+        what matters most.
+      </p>
+
+      <div className="flex gap-6 items-center pt-4">
+        <div className="h-16 w-[1px] bg-gradient-to-b from-indigo-500 to-transparent" />
+        <p className="text-sm md:text-base italic text-gray-600 max-w-xs leading-tight font-medium">
+          "The best way to predict the future is to invent it."
+        </p>
+      </div>
+    </motion.div>
+
+    {/* RIGHT STATS: Full width grid */}
+    <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 md:gap-6 w-full">
+      {[
+        { title: "Models", count: "200+" },
+        { title: "Latency", count: "<20ms" },
+        { title: "Uptime", count: "99.9%" },
+        { title: "Devs", count: "5K+" },
+      ].map((stat, i) => (
+        <motion.div 
+          key={i}
+          whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.02)" }}
+          className="p-10 md:p-14 rounded-[2.5rem] bg-[#0a0a0f] border border-white/5 flex flex-col justify-center items-center transition-all duration-500 shadow-2xl"
+        >
+          <div className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter italic">
+            {stat.count}
           </div>
-        </div>
-      </section>
+          <div className="text-indigo-500 text-[10px] md:text-xs uppercase tracking-[0.3em] font-black opacity-80">
+            {stat.title}
+          </div>
+        </motion.div>
+      ))}
+    </div>
 
+  </div>
+</section>
       {/* 3. CTA Section - Minimalist & Bold */}
       <section className="py-24 px-6">
         <motion.div 

@@ -2,165 +2,94 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../../Authcontext";
 import { Link, useNavigate } from "react-router";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AISpinner from "../AIspinner/AISpinner";
-import "./Model.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Model = () => {
   const { modelData } = useContext(AuthContext);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [framework, setFramework] = useState("All");
-
   const navigate = useNavigate();
   const cardsRef = useRef([]);
 
-  // ✅ REAL loading state (NO fake timeout)
   const loading = !modelData || modelData.length === 0;
+  const frameworks = ["All", ...new Set((modelData || []).map((item) => item.framework))];
 
-  
-  const frameworks = [
-    "All",
-    ...new Set((modelData || []).map(item => item.framework)),
-  ];
-
-  // Filter models
   const filteredModels = (modelData || [])
-    .filter(item => item.createdAt)
+    .filter((item) => item.createdAt)
     .filter(
-      item =>
+      (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.useCase.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter(item =>
-      framework === "All" ? true : item.framework === framework
-    );
+    .filter((item) => (framework === "All" ? true : item.framework === framework));
 
-  // GSAP animation on cards
   useEffect(() => {
     if (loading) return;
-
     gsap.fromTo(
       cardsRef.current,
-      { opacity: 0, y: 50, scale: 0.96 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        stagger: 0.08,
-        duration: 0.8,
-        ease: "power3.out",
-      }
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.03, duration: 0.5, ease: "power2.out" }
     );
   }, [filteredModels, loading]);
 
   return (
-    <section className="w-full min-h-screen p-8  text-white">
-      <h2 className="text-4xl font-semibold text-center mb-10">
-      
-      </h2>
-
-      {/* Search */}
-      <div className="mb-6 flex justify-center">
-        <input
-          type="text"
-          placeholder="Search AI models or use cases..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          className="w-full max-w-md p-3 rounded-xl
-                     border border-white/10 bg-black
-                     backdrop-blur outline-none text-white"
-        />
-      </div>
-
-      {/* Filter */}
-      <div className="mb-10 flex justify-center">
-        <select
-          value={framework}
-          onChange={e => setFramework(e.target.value)}
-          className="p-3 w-full max-w-xs rounded-xl
-                     bg-white/5 backdrop-blur
-                     text-[#92afcf] border border-black/10"
-        >
-          {frameworks.map(fw => (
-            <option key={fw} value={fw}>{fw}</option>
-          ))}
-        </select>
-      </div>
-
-      {/* LOADING */}
-      {loading && (
-        <div className="min-h-[60vh] flex items-center justify-center">
-          <AISpinner />
+    <section className="w-full min-h-screen  text-indigo-500">
+      {/* HEADER: Full Width with Border */}
+      <div className="w-full border-b border-white/5 px-6 md:px-10 py-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div>
+          <h2 className="text-indigo-500 font-black tracking-[0.4em] uppercase text-[10px] mb-2">Neural Nexus</h2>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">
+            Market<span className="text-indigo/20 italic font-light">place</span>
+          </h1>
         </div>
-      )}
 
-      {/* DATA */}
-      {!loading && (
-        <>
-          {filteredModels.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              {filteredModels.map((expert, index) => (
-                <Link
-                  to={`/MODEL/${expert._id}`}
-                  key={expert._id}
-                  ref={el => (cardsRef.current[index] = el)}
-                  className="group relative p-4 rounded-2xl
-                             bg-white/5 backdrop-blur
-                             border border-white/10
-                             transition hover:scale-[1.04]"
-                >
-                  {/* Glow */}
-                  <div className="absolute inset-0 rounded-2xl
-                                  opacity-0 group-hover:opacity-100
-                                  bg-indigo-500/10 blur-xl transition" />
+        {/* CONTROLS */}
+        <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+          <input
+            type="text"
+            placeholder="Search assets..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-grow lg:w-80 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-indigo-500 transition-all text-sm"
+          />
+          <select
+            value={framework}
+            onChange={(e) => setFramework(e.target.value)}
+            className="bg-[#0a0a0f] border border-white/10 px-6 py-4 rounded-2xl outline-none text-sm text-gray-400"
+          >
+            {frameworks.map((fw) => <option key={fw} value={fw}>{fw}</option>)}
+          </select>
+        </div>
+      </div>
 
+      {/* GRID: Responsive from 2 to 8 columns */}
+      <div className="w-full px-6 md:px-10 py-10">
+        {loading ? (
+          <div className="flex items-center justify-center py-40"><AISpinner /></div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-8 gap-4 md:gap-6">
+            {filteredModels.map((expert, index) => (
+              <Link
+                to={`/MODEL/${expert._id}`}
+                key={expert._id}
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="group bg-[#0a0a0f] border border-white/5 p-5 rounded-2xl transition-all duration-500 hover:border-indigo-500/50 hover:-translate-y-1 shadow-2xl"
+              >
+                <div className="aspect-square w-full mb-4 flex items-center justify-center bg-white/5 rounded-xl p-4 overflow-hidden">
                   <img
                     src={expert.image || "/default-model.png"}
                     alt={expert.name}
-                    className="relative z-10 w-28 h-28 mx-auto
-                               object-contain mb-4"
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
-
-                  <h3 className="relative z-10 text-center
-                                 text-indigo-400 font-semibold">
-                    {expert.name}
-                  </h3>
-
-                  <p className="relative z-10 text-center
-                                text-sm text-white/70 mt-1">
-                    {expert.useCase}
-                  </p>
-
-                  <p className="relative z-10 text-center
-                                text-xs text-white/40 mt-1">
-                    {expert.framework}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            // 404
-            <div className="h-[60vh] flex flex-col
-                            items-center justify-center text-center">
-              <h1 className="text-8xl font-bold text-indigo-400">404</h1>
-              <p className="text-white/60 mt-4">
-                No AI models found
-              </p>
-              <button
-                onClick={() => navigate("/")}
-                className="mt-8 px-6 py-3
-                           rounded-full bg-white text-black
-                           font-medium hover:scale-105 transition"
-              >
-                Go Back
-              </button>
-            </div>
-          )}
-        </>
-      )}
+                </div>
+                <h3 className="text-xs font-black tracking-tight text-gray-300 uppercase truncate mb-1">{expert.name}</h3>
+                <p className="text-[9px] font-bold text-indigo-500/60 uppercase mb-2">{expert.framework}</p>
+                <p className="text-[10px] text-gray-600 line-clamp-1 italic">{expert.useCase}</p>
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 };

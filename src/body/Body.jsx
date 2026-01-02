@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import HomeSections from "../Component/House/HomeSections";
 import Model2nd from "../Component/2nd model/Model2nd";
 import About from "../Component/About us/About";
+import PrivacyTerms from "../Component/PrivacyTerms/PrivacyTerms";
 
 function Body() {
   const { user } = useContext(AuthContext);
@@ -100,18 +101,60 @@ function Body() {
       </section>
 
       {/* Section 02: Evolution - Glassmorphism (Theme Safe) */}
-      <section className="section-three w-full py-32 px-8">
-        <div className="max-w-5xl mx-auto bg-zinc-500/5 backdrop-blur-3xl rounded-[3rem] p-12 border border-zinc-500/10">
-          <h3 className="text-indigo-500 uppercase tracking-widest text-xs mb-6 font-bold">02 — Future Path</h3>
-          <h1 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight">
-            The Agentic Era
+      <section className="section-three w-full py-20 px-4 md:px-10 ">
+ 
+  <div className="w-full bg-gradient-to-br from-zinc-500/10 via-transparent to-transparent backdrop-blur-3xl rounded-[3.5rem] p-10 md:p-20 border border-white/5 relative overflow-hidden">
+    
+   
+    <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 blur-[120px] -z-10" />
+    <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-500/5 blur-[120px] -z-10" />
+
+    {/* CONTENT STRUCTURE */}
+    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-16">
+      
+      {/* TEXT LEFT */}
+      <div className="flex-1 space-y-8">
+        <div>
+          <h3 className="text-indigo-500 uppercase tracking-[0.4em] text-[10px] mb-6 font-black">
+            02 — Future Path
+          </h3>
+          <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]">
+            The Agentic <br />
+            <span className="text-[#d0ff00] italic font-light">Era</span>
           </h1>
-          <Note />
-          <p className="max-w-2xl text-xl text-zinc-500 mt-10 font-light">
-            The AI revolution is shifting from simple classification to generative systems and agentic AI with a deep focus on Responsibility.
-          </p>
         </div>
-      </section>
+
+        {/* Note Component */}
+        <div className="scale-105 origin-left">
+          <Note />
+        </div>
+
+        <p className="max-w-2xl text-xl md:text-2xl text-zinc-500 font-medium leading-relaxed tracking-tight">
+          The AI revolution is shifting from simple classification to <span className="text-white">generative systems</span> and agentic AI with a deep focus on <span className="text-indigo-400">Responsibility</span>.
+        </p>
+      </div>
+
+      {/* RIGHT SIDE DECORATION (Modern AI visual touch) */}
+      <div className="hidden lg:block w-px h-80 bg-gradient-to-b from-transparent via-white/10 to-transparent mx-10" />
+      
+      <div className="lg:w-1/3">
+        <div className="p-8 border border-white/5 rounded-3xl bg-white/[0.02]">
+           <div className="flex gap-2 mb-4">
+              <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-zinc-800" />
+              <div className="w-2 h-2 rounded-full bg-zinc-800" />
+           </div>
+           <p className="text-xs text-zinc-600 font-mono leading-relaxed uppercase tracking-widest">
+             Status: Activating Autonomous Nodes... <br />
+             Focus: Neural Autonomy <br />
+             Protocol: Responsible AI 2.0
+           </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Section 03: Cards - Neutral Indigo & Slate */}
       <section className="section-four w-full py-32 px-8">
@@ -154,9 +197,11 @@ function Body() {
           </div>
         </div>
       </section>
-
+<section>
+  <PrivacyTerms></PrivacyTerms>
+</section>
       {/* User Section */}
-      <section className="py-24 px-8 border-t border-zinc-200/10">
+      {/* <section className="py-24 px-8 border-t border-zinc-200/10">
         <div className="max-w-7xl mx-auto">
           {user ? (
             <Model2nd />
@@ -167,7 +212,7 @@ function Body() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
       <About />
     </main>

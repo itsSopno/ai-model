@@ -34,7 +34,7 @@ const Nav = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={` top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
+      className={`fixed top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
         scrolled 
           ? "bg-white/5 backdrop-blur-xl border-b border-white/10 py-3" 
           : "bg-transparent py-6"
@@ -44,11 +44,15 @@ const Nav = () => {
         
         {/* LEFT: DESKTOP MENU */}
         <div className="hidden lg:flex items-center gap-8">
+            <Link to="MODEL" className={linkClasses}>Models</Link>
+            <Link to="Privacy" className={linkClasses}>Privacy</Link>
           {user && (
             <>
               <Link to="Profile" className={linkClasses}>Profile</Link>
-              <Link to="Publish" className={linkClasses}>Publish</Link>
-              <Link to="buyer-app" className={linkClasses}>Library</Link>
+              {/* <Link to="Publish" className={linkClasses}>Publish</Link> */}
+              {/* <Link to="buyer-app" className={linkClasses}>Library</Link>
+              <Link to="/Dashboard" className={linkClasses}>Dashboard</Link> */}
+              
             </>
           )}
         </div>
@@ -65,8 +69,8 @@ const Nav = () => {
         <div className="hidden lg:flex items-center gap-8">
           {user ? (
             <>
-              <Link to="MODEL" className={linkClasses}>Models</Link>
-              {hasMyModel && <Link to="my-model" className={linkClasses}>Ownership</Link>}
+             
+             <Link to="/Dashboard" className={linkClasses}>Dashboard</Link>
               <button onClick={handleLogout} className="text-[10px] px-4 py-2 border border-zinc-500/30 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-widest">
                 Logout
               </button>
@@ -104,10 +108,8 @@ const Nav = () => {
           >
             {user ? (
               <>
-                <Link onClick={() => setIsMobileMenuOpen(false)} to="Profile" className="text-3xl font-bold italic uppercase">Profile</Link>
-                <Link onClick={() => setIsMobileMenuOpen(false)} to="Publish" className="text-3xl font-bold italic uppercase">Publish</Link>
+               <Link to="/Dashboard" className={linkClasses}>Dashboard</Link>
                 <Link onClick={() => setIsMobileMenuOpen(false)} to="MODEL" className="text-3xl font-bold italic uppercase">Models</Link>
-               <Link to="buyer-app" className={linkClasses}>Library</Link>
                 <button onClick={handleLogout} className="text-left text-red-500 font-bold uppercase tracking-widest text-sm">Sign Out</button>
               </>
             ) : (

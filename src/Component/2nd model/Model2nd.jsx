@@ -32,92 +32,110 @@ const Model2nd = () => {
   };
 
   return (
-    <section className="py-20 px-6 min-h-screen  text-white">
-      {/* HEADER */}
-      <div className="max-w-7xl mx-auto mb-16">
+   <section className="w-full min-h-screen  text-white">
+  {/* --- FULL WIDTH HEADER --- */}
+  <div className="w-full border-b border-white/5 px-6 md:px-10 py-16 lg:py-24">
+    <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
         <h2 className="text-indigo-500 font-black tracking-[0.4em] uppercase text-[10px] mb-4">
           Personal Repository
         </h2>
-        <h1 className="text-5xl md:text-6xl font-black tracking-tighter">
-          CREATED BY <span className="text-white/20 font-light italic text-4xl md:text-5xl">YOU</span>
+        <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8]">
+          CREATED BY <br />
+          <span className="text-[#d0ff00] font-light italic text-4xl md:text-7xl opacity-90">
+            YOU
+          </span>
         </h1>
-        <div className="h-[1px] w-24 bg-indigo-600 mt-6" />
       </div>
+      
+      {/* Dynamic Count Badge */}
+      <div className="bg-white/5 border border-white/10 px-6 py-3 rounded-2xl backdrop-blur-xl">
+        <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">
+          Total Assets: <span className="text-white ml-2">{userModels.length}</span>
+        </p>
+      </div>
+    </div>
+  </div>
 
-      <div className="max-w-7xl mx-auto">
-        {userModels.length === 0 ? (
-          <div className="py-20 border border-dashed border-white/5 rounded-3xl text-center bg-white/[0.01]">
-            <p className="text-gray-500 font-bold tracking-widest uppercase text-xs">
-              No published records found in your database.
-            </p>
-          </div>
-        ) : (
+  {/* --- FULL WIDTH CONTENT GRID --- */}
+  <div className="w-full px-6 md:px-10 py-12">
+    {userModels.length === 0 ? (
+      <div className="w-full py-32 border border-dashed border-white/5 rounded-[3rem] text-center bg-white/[0.01]">
+        <h1 className="text-6xl font-black text-white/5 mb-4 uppercase">Void</h1>
+        <p className="text-gray-600 font-bold tracking-[0.3em] uppercase text-[10px]">
+          No published records found in your database.
+        </p>
+      </div>
+    ) : (
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 md:gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {userModels.map((expert) => (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+            key={expert._id || expert.id}
+            variants={cardVariants}
+            className="group relative bg-[#0a0a0f] border border-white/5 rounded-[2.5rem] overflow-hidden hover:border-indigo-500/30 transition-all duration-500 shadow-2xl flex flex-col h-full"
           >
-            {userModels.map((expert) => (
-              <motion.div
-                key={expert._id || expert.id}
-                variants={cardVariants}
-                className="group relative bg-[#0a0a0f] border border-white/5 rounded-2xl overflow-hidden hover:border-indigo-500/30 transition-all duration-500"
-              >
-                {/* Image Section (Modern Rectangular Look) */}
-                <div className="aspect-video w-full overflow-hidden bg-[#11111a] relative">
-                  <img
-                    src={expert.image || "/default-model.png"}
-                    alt={expert.name}
-                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] to-transparent" />
-                  
-                  {/* Badge */}
-                  <div className="absolute top-4 left-4 bg-indigo-600 px-3 py-1 rounded-full shadow-lg">
-                    <span className="text-[9px] font-black uppercase tracking-tighter italic">Origin: User</span>
-                  </div>
+            {/* Visual Header */}
+            <div className="aspect-video w-full overflow-hidden bg-[#11111a] relative">
+              <img
+                src={expert.image || "/default-model.png"}
+                alt={expert.name}
+                className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+              
+              <div className="absolute top-6 left-6 flex gap-2">
+                <div className="bg-indigo-600 px-4 py-1.5 rounded-full shadow-2xl">
+                  <span className="text-[8px] font-black uppercase tracking-tighter italic text-white">
+                    Origin: Master
+                  </span>
                 </div>
+              </div>
+            </div>
 
-                {/* Content Section */}
-                <div className="p-8">
-                  <h3 className="text-xl font-bold tracking-tight text-white mb-2 uppercase group-hover:text-indigo-400 transition-colors">
-                    {expert.name}
-                  </h3>
-                  
-                  <p className="text-[10px] font-black text-indigo-500/60 uppercase tracking-widest mb-4">
-                    {expert.useCase || "General Purpose"}
-                  </p>
+            {/* Core Info */}
+            <div className="p-8 flex flex-col flex-grow">
+              <h3 className="text-2xl font-black tracking-tight text-white mb-2 uppercase group-hover:text-indigo-400 transition-colors">
+                {expert.name}
+              </h3>
+              
+              <p className="text-[10px] font-black text-indigo-500 uppercase tracking-[0.2em] mb-4">
+                {expert.framework} // {expert.useCase || "Neural Asset"}
+              </p>
 
-                  <p className="text-sm text-gray-500 mb-8 line-clamp-2 leading-relaxed">
-                    {expert.description || "System overview pending for this specific AI asset."}
-                  </p>
+              <p className="text-sm text-gray-500 mb-8 line-clamp-3 leading-relaxed font-medium italic">
+                {expert.description || "System overview pending for this specific AI asset. No metadata provided."}
+              </p>
 
-                  {/* Actions (Icon-less but Pro) */}
-                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
-                    <Link
-                      to={`/MODEL/${expert._id}`}
-                      className="flex items-center justify-center py-3 rounded-xl bg-white text-black text-[10px] font-black tracking-[0.2em] uppercase hover:bg-indigo-500 hover:text-white transition-all duration-300"
-                    >
-                      View Detail
-                    </Link>
-                    <Link
-                      to={`/edit/${expert._id}`}
-                      className="flex items-center justify-center py-3 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black tracking-[0.2em] uppercase hover:bg-green-600/20 hover:text-green-400 hover:border-green-500/30 transition-all duration-300"
-                    >
-                      Modify
-                    </Link>
-                  </div>
-                </div>
+              {/* Action Grid */}
+              <div className="grid grid-cols-2 gap-3 mt-auto pt-6 border-t border-white/5">
+                <Link
+                  to={`/MODEL/${expert._id}`}
+                  className="flex items-center justify-center py-4 rounded-2xl bg-white text-black text-[9px] font-black tracking-[0.2em] uppercase hover:bg-indigo-500 hover:text-white transition-all duration-500"
+                >
+                  View Detail
+                </Link>
+                <Link
+                  to={`/edit/${expert._id}`}
+                  className="flex items-center justify-center py-4 rounded-2xl bg-white/5 border border-white/10 text-white text-[9px] font-black tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-500"
+                >
+                  Modify
+                </Link>
+              </div>
+            </div>
 
-                {/* Animated Background Glow */}
-                <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-indigo-600/10 blur-[80px] group-hover:bg-indigo-600/20 transition-all" />
-              </motion.div>
-            ))}
+            {/* Subtle Glow */}
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-indigo-500/5 blur-[100px] group-hover:bg-indigo-500/10 transition-all duration-700" />
           </motion.div>
-        )}
-      </div>
-    </section>
+        ))}
+      </motion.div>
+    )}
+  </div>
+</section>
   );
 };
 

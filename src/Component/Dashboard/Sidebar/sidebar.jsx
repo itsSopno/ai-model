@@ -28,12 +28,12 @@ const Sidebar = () => {
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed left-0 top-0 z-40 w-64 h-screen bg-[#050508] border-r border-white/5 flex flex-col md:sticky"
+            className="fixed left-0 top-0 z-40 w-64 h-screen bg-white border-r border-white/5 flex flex-col md:sticky"
           >
             {/* Logo Section */}
             <div className="h-24 flex items-center px-8">
               <Link to="/" className="group">
-                <h1 className="text-xl font-black text-white tracking-tighter">
+                <h1 className="text-xl font-black text-black tracking-tighter">
                   AI<span className="text-indigo-500">MODEL</span>
                 </h1>
                 <div className="h-[1px] w-0 group-hover:w-full bg-indigo-500 transition-all duration-500" />
@@ -46,7 +46,7 @@ const Sidebar = () => {
                 
                 {/* Main Menu Label */}
                 <div>
-                  <h3 className="px-4 text-[9px] font-black text-gray-600 uppercase tracking-[0.3em] mb-4">
+                  <h3 className="px-4 text-[9px] font-black text-black uppercase tracking-[0.3em] mb-4">
                     Product Management
                   </h3>
                   <div className="flex flex-col gap-1">
@@ -56,7 +56,7 @@ const Sidebar = () => {
 
                 {/* Account Label */}
                 <div>
-                  <h3 className="px-4 text-[9px] font-black text-gray-600 uppercase tracking-[0.3em] mb-4">
+                  <h3 className="px-4 text-[9px] font-black text-black uppercase tracking-[0.3em] mb-4">
                     Settings
                   </h3>
                   <NavLink 
@@ -74,8 +74,8 @@ const Sidebar = () => {
             </div>
 
             {/* Footer Section */}
-            <div className="p-6 mt-auto border-t border-white/5 space-y-4 bg-[#050508]">
-              <Link to="/" className="block px-4 text-[10px] font-black tracking-widest text-gray-500 hover:text-white uppercase transition-colors">
+            <div className="p-6 mt-auto border-t border-white/5 space-y-4 bg-indigo-500">
+              <Link to="/" className="block px-4 text-[10px] font-black tracking-widest text-white hover:text-white uppercase transition-colors">
                 Back to Site
               </Link>
               <button

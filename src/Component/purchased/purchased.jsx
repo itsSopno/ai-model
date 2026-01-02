@@ -71,7 +71,7 @@ const Purchased = () => {
         </h2>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <h1 className="text-5xl md:text-6xl font-black tracking-tighter">
-            PURCHASED <span className="text-white/20 font-light italic">MODEL</span>
+            PURCHASED <span className="text-[#d0ff00] font-light italic">MODEL</span>
           </h1>
           <p className="text-gray-500 text-sm font-medium border-l border-white/10 pl-4">
             Showing {userModels.length} active licenses in your repository.

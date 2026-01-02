@@ -47,9 +47,7 @@ const Login = () => {
 
   return (
     <motion.section
-      className={`min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 ${
-        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
-      }`}
+      className={`min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 bg-[#d0ff00]`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}

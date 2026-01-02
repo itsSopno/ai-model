@@ -8,7 +8,7 @@ const Allmenu = () => {
     const hasMyModel = user && modelData?.some(model => model.createdBy === user.email);
   return (
    
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full text-black">
         <MenuItem
         label='Publish Your AI Model'
         address='Publish'></MenuItem>

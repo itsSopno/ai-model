@@ -3,97 +3,103 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { AuthContext } from "../../Authcontext";
 
-const Footer = () => {
-  const { user, theme } = useContext(AuthContext);
 
-  // Framer motion variants
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+const Footer = () => {
+  const { user, theme, setTheme } = useContext(AuthContext);
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
-    <motion.footer
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={fadeUp}
-      transition={{ duration: 0.8 }}
-      className={`w-full px-6 md:px-16 py-10 mt-16 rounded-t-3xl
-        ${theme === "dark" ? "bg-black text-[#92afcf]" : "bg-white text-[#11190C]"}`}
-    >
-      {/* Top links */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
-        <nav className="flex gap-6 flex-wrap text-sm md:text-base">
-          <Link to="/" className="hover:text-indigo-400 transition">Home</Link>
-          <Link to="/MODEL" className="hover:text-indigo-400 transition">Models</Link>
-          {user ? (
-            <>
-              <Link to="/Profile" className="hover:text-indigo-400 transition">Profile</Link>
-              <Link to="/Publish" className="hover:text-indigo-400 transition">Publish AI</Link>
-            </>
-          ) : (
-            <Link to="/login" className="hover:text-indigo-400 transition">Login</Link>
-          )}
-        </nav>
+    <footer className="w-full  text-white border-t border-white/5 pt-20 pb-10">
+      <div className="w-full px-6 md:px-16 lg:px-24">
+        
+        {/* MAIN FOOTER GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          
+          {/* Brand Column */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-black italic tracking-tighter uppercase">
+              AI <span className="text-indigo-500">VERSE</span>
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+              The premier marketplace for high-performance neural assets. 
+              Deploy, trade, and integrate the future of logic.
+            </p>
+            <div className="flex gap-4">
+              {[].map((Icon, i) => (
+                <motion.a
+                  key={i}
+                  href="#"
+                  whileHover={{ y: -5, color: "#6366f1" }}
+                  className="text-gray-600 transition-colors text-lg"
+                >
+                  <Icon />
+                </motion.a>
+              ))}
+            </div>
+          </div>
 
-        {/* Theme toggle */}
-        <button
-          className={`px-4 py-2 rounded-full border transition
-            ${theme === "dark"
-              ? "border-[#92afcf] text-white hover:bg-[#92afcf] hover:text-black"
-              : "border-[#11190C] text-[#11190C] hover:bg-[#11190C] hover:text-white"
-            }`}
-        >
-          {theme === "dark" ? "Light Mode" : "Dark Mode"}
-        </button>
+          {/* Navigation Column */}
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">Navigation</h4>
+            <nav className="flex flex-col gap-3 text-sm font-medium text-gray-500">
+              <Link to="/" className="hover:text-white transition">Home</Link>
+              <Link to="/MODEL" className="hover:text-white transition">Model Hub</Link>
+              <Link to="/about" className="hover:text-white transition">Mission</Link>
+              <Link to="/docs" className="hover:text-white transition">Neural Docs</Link>
+            </nav>
+          </div>
+
+          {/* Account Column */}
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">Account</h4>
+            <nav className="flex flex-col gap-3 text-sm font-medium text-gray-500">
+              {user ? (
+                <>
+                  <Link to="/Profile" className="hover:text-white transition">Neural Profile</Link>
+                  <Link to="/Publish" className="hover:text-white transition">Deploy Model</Link>
+                  <Link to="/settings" className="hover:text-white transition">Sync Settings</Link>
+                </>
+              ) : (
+                <Link to="/login" className="hover:text-white transition">Network Access (Login)</Link>
+              )}
+            </nav>
+          </div>
+
+          {/* Control Column */}
+          <div className="space-y-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">System Preferences</h4>
+            <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
+              <p className="text-[10px] text-gray-600 font-bold mb-4 uppercase">Toggle Neural Interface</p>
+              <button
+                onClick={toggleTheme}
+                className="w-full py-3 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-indigo-600 hover:text-white transition-all duration-500"
+              >
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM BAR */}
+        <div className="w-full border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex gap-8 text-[9px] font-black text-gray-600 uppercase tracking-widest">
+            <Link to="/Privacy" className="hover:text-indigo-500">Privacy Policy</Link>
+            <Link to="/Terms" className="hover:text-indigo-500">Terms of Operation</Link>
+          </div>
+
+          <motion.div
+            className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+          >
+            © {new Date().getFullYear()} — <span className="text-white/40 italic">MISTI ALUUU NEXUS</span>
+          </motion.div>
+        </div>
       </div>
-
-      {/* Social icons */}
-      <div className="flex justify-center gap-6 mb-6">
-        <motion.a
-          href="#"
-          whileHover={{ scale: 1.2 }}
-          aria-label="Twitter"
-          className="transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
-            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-          </svg>
-        </motion.a>
-        <motion.a
-          href="#"
-          whileHover={{ scale: 1.2 }}
-          aria-label="YouTube"
-          className="transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
-            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-          </svg>
-        </motion.a>
-        <motion.a
-          href="#"
-          whileHover={{ scale: 1.2 }}
-          aria-label="Facebook"
-          className="transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-          </svg>
-        </motion.a>
-      </div>
-
-      {/* Copyright */}
-      <motion.div
-        className="text-center text-sm text-white/60"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-      >
-        <p>© {new Date().getFullYear()} - MADE BY MISTI ALUUU</p>
-      </motion.div>
-    </motion.footer>
+    </footer>
   );
 };
 

@@ -14,6 +14,8 @@
 
 ## 🖥️ Desgin Screenshot
 ![Dashboard Screenshot](model-logo/ai-model.png)
+## 🖥️ Desgin Screenshot
+![Dashboard Screenshot](model-logo/dashboard.png)
 
 ---
 

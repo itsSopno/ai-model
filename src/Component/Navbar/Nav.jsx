@@ -34,7 +34,7 @@ const Nav = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
+      className={` top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
         scrolled 
           ? "bg-white/5 backdrop-blur-xl border-b border-white/10 py-3" 
           : "bg-transparent py-6"

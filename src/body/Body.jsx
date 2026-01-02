@@ -57,7 +57,7 @@ function Body() {
 
       {/* Hero Section - Uses Neutral Gradients */}
       <section className="relative w-full h-screen flex justify-center items-center text-center px-4 overflow-hidden">
-        {/* থিম সেফ গ্রাডিয়েন্ট: নীলচে আভা যা দুই থিমেই সুন্দর */}
+      
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(99,102,241,0.1),transparent_70%)]" />
         
         <motion.h1

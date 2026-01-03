@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router';
-import { motion, AnimatePresence } from "framer-motion";
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../Authcontext';
 
 const Nav = () => {
-  const { user, logout, theme, setTheme, modelData } = useContext(AuthContext);
+  const { user, logout, theme, setTheme } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -16,113 +13,95 @@ const Nav = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Theme logic remains the same
   useEffect(() => {
     document.documentElement.className = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => setTheme(prev => prev === "dark" ? "light" : "dark");
-  const handleLogout = async () => { await logout(); navigate('/'); };
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
-  const hasMyModel = user && modelData?.some(model => model.createdBy === user.email);
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
-  // Link Hover Animation logic
-  const linkClasses = `text-[11px] font-bold tracking-[0.2em] uppercase transition-all duration-300 hover:text-indigo-500`;
+  const linkClasses = "font-semibold uppercase transition-colors hover:text-indigo-500";
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 w-full  z-[100] transition-all duration-500 px-6 md:px-12 py-4 ${
-        scrolled 
-          ? "bg-white/5 backdrop-blur-xl border-b border-white/10 py-3" 
-          : "bg-transparent py-6"
-      }`}
-    >
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-        
-        {/* LEFT: DESKTOP MENU */}
-        <div className="hidden lg:flex items-center gap-8">
-            <Link to="MODEL" className={linkClasses}>Models</Link>
-            <Link to="Privacy" className={linkClasses}>Privacy</Link>
-          {user && (
-            <>
-              <Link to="Profile" className={linkClasses}>Profile</Link>
-              {/* <Link to="Publish" className={linkClasses}>Publish</Link> */}
-              {/* <Link to="buyer-app" className={linkClasses}>Library</Link>
-              <Link to="/Dashboard" className={linkClasses}>Dashboard</Link> */}
-              
-            </>
-          )}
-        </div>
-
-        {/* CENTER: LOGO */}
-        <div className="flex items-center">
-          <Link to="/" className="text-2xl font-black tracking-tighter flex items-center gap-1 group">
-            <span className="group-hover:italic transition-all">AI</span>
-            <span className="text-indigo-500 italic font-light">VERSE</span>
-          </Link>
-        </div>
-
-        {/* RIGHT: ACTIONS */}
-        <div className="hidden lg:flex items-center gap-8">
-          {user ? (
-            <>
-             
-             <Link to="/Dashboard" className={linkClasses}>Dashboard</Link>
-              <button onClick={handleLogout} className="text-[10px] px-4 py-2 border border-zinc-500/30 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-widest">
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link to="login" className={linkClasses}>Login</Link>
-          )}
-          
-          {/* Theme Toggle Button */}
-          <button 
-            onClick={toggleTheme}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-500/10 hover:bg-zinc-500/20 transition-all border border-white/5"
+    <div className={`navbar px-6 md:px-12 fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? " backdrop-blur-md shadow-md py-3" : "bg-transparent py-5"}`}>
+      
+      {/* Navbar Start: Logo + Mobile Dropdown */}
+      <div className="navbar-start">
+        {/* Mobile Dropdown */}
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {theme === "dark" ? "☼" : "☾"}
-          </button>
-        </div>
-
-        {/* MOBILE MENU TOGGLE */}
-        <button 
-          className="lg:hidden text-2xl" 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? "✕" : "⠿"}
-        </button>
-      </div>
-
-      {/* MOBILE MENU OVERLAY */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden absolute top-full left-0 w-full  backdrop-blur-3xl border-b border-white/10 px-8 py-12 flex flex-col gap-6"
-          >
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/MODEL">Models</Link></li>
+            <li><Link to="/Privacy">Privacy</Link></li>
+            <li><Link to="/About">About</Link></li>
             {user ? (
               <>
-               <Link to="/Dashboard" className={linkClasses}>Dashboard</Link>
-                <Link onClick={() => setIsMobileMenuOpen(false)} to="MODEL" className="text-3xl font-bold italic uppercase">Models</Link>
-                <button onClick={handleLogout} className="text-left text-red-500 font-bold uppercase tracking-widest text-sm">Sign Out</button>
+                <li><Link to="/Dashboard">Dashboard</Link></li>
+                <li><Link to="/Profile">Profile</Link></li>
+                <li>
+                  <button onClick={handleLogout} className="text-red-500 font-bold w-full text-left">
+                    Sign Out
+                  </button>
+                </li>
               </>
             ) : (
-              <Link onClick={() => setIsMobileMenuOpen(false)} to="login" className="text-4xl font-bold">Login</Link>
+              <li><Link to="/login">Login</Link></li>
             )}
-            <div className="h-[1px] bg-white/10 my-4" />
-            <button onClick={toggleTheme} className="uppercase tracking-[0.3em] text-[10px]">
-              Switch to {theme === "dark" ? "Light" : "Dark"} Mode
-            </button>
-          </motion.div>
+            <li>
+              <button onClick={toggleTheme} className="w-full text-left">
+                Switch to {theme === 'dark' ? 'Light' : 'Dark'}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        {/* Logo */}
+        <Link to="/" className="btn btn-ghost normal-case text-xl ml-2 flex items-center gap-1">
+          <span className="text-indigo-500 italic font-light">AI</span>
+          <span>VERSE</span>
+        </Link>
+      </div>
+
+      {/* Navbar Center: Desktop Menu */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 gap-6">
+          <li><Link to="/" className={linkClasses}>Home</Link></li>
+          <li><Link to="/MODEL" className={linkClasses}>Models</Link></li>
+          <li><Link to="/Privacy" className={linkClasses}>Privacy</Link></li>
+          <li><Link to="/About" className={linkClasses}>About</Link></li>
+          {user && <li><Link to="/Profile" className={linkClasses}>Profile</Link></li>}
+        </ul>
+      </div>
+
+      {/* Navbar End: Actions */}
+      <div className="navbar-end flex items-center gap-2">
+        {user ? (
+          <button onClick={handleLogout} className="btn btn-sm btn-outline btn-error hidden lg:block">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-sm btn-primary hidden lg:block">
+            Login
+          </Link>
         )}
-      </AnimatePresence>
-    </motion.nav>
+        <button onClick={toggleTheme} className="btn btn-sm btn-ghost">
+          {theme === 'dark' ? '☼' : '☾'}
+        </button>
+      </div>
+    </div>
   );
 };
 

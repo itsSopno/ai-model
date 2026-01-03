@@ -1,5 +1,9 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Asimovian&display=swap');
+.section-two,.section-three{
+    font-family: 'Asimovian', sans-serif;
+    font-weight: 400;
+  font-style: normal;
+}
 .AI-VERSE {
   display: flex;
   flex-direction: column;

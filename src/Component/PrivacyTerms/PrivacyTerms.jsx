@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import "./privacy.css"
 const PrivacyTerms = () => {
   const [activeTab, setActiveTab] = useState("privacy");
 
   return (
-    <section className="w-full min-h-screen  text-white">
+    <section className="teams w-full min-h-screen  text-white">
       {/* HEADER SECTION */}
       <div className="w-full border-b border-white/5 px-6 md:px-10 py-20 bg-gradient-to-b from-indigo-500/5 to-transparent">
         <h2 className="text-indigo-500 font-black tracking-[0.4em] uppercase text-[10px] mb-4">
@@ -61,7 +61,8 @@ const PrivacyTerms = () => {
           </div>
 
           {/* Main Content Scroll */}
-          <div className="lg:col-span-9 max-w-4xl">
+        <div className=" lg:col-span-9 max-w-4xl">
+
             <AnimatePresence mode="wait">
               {activeTab === "privacy" ? (
                 <motion.div
@@ -69,9 +70,10 @@ const PrivacyTerms = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
+                 style={{ fontFamily: "'Asimovian', sans-serif", fontWeight: "400", fontStyle: "normal" }}
                   className="space-y-12"
                 >
-                  <section>
+                  <section className="">
                     <h3 className="text-2xl text-[#d0ff00] uppercase tracking-tight mb-6">01. Data Collection</h3>
                     <p className=" text-[#8116e0] leading-loose">
                       At AssetVerse, we collect neural pattern metadata and user configuration logs to enhance your AI training experience. 

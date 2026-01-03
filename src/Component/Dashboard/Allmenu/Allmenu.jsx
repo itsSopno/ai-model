@@ -18,6 +18,9 @@ const Allmenu = () => {
         <MenuItem 
         label="My Models"
         address="my-model"></MenuItem>
+        <MenuItem 
+        label="chart"
+        address="Chart"></MenuItem>
     </div>
   );
 };

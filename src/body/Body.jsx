@@ -11,7 +11,7 @@ import HomeSections from "../Component/House/HomeSections";
 import Model2nd from "../Component/2nd model/Model2nd";
 import About from "../Component/About us/About";
 import PrivacyTerms from "../Component/PrivacyTerms/PrivacyTerms";
-
+import "./app.css"
 function Body() {
   const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
@@ -197,7 +197,7 @@ function Body() {
           </div>
         </div>
       </section>
-<section>
+<section className="privacy">
   <PrivacyTerms></PrivacyTerms>
 </section>
       {/* User Section */}

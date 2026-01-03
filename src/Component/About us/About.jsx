@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import image from "./ChatGPT Image Nov 29, 2025, 04_13_43 PM.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+import './About.css'
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
@@ -52,7 +52,7 @@ const About = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full min-h-screen  flex items-center overflow-hidden py-24 px-6 md:px-12"
+      className="about relative w-full min-h-screen  flex items-center overflow-hidden py-24 px-6 md:px-12"
     >
       {/* Background Cinematic Text */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 select-none pointer-events-none opacity-[0.03] w-full">

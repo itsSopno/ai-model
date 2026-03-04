@@ -1,0 +1,166 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    mix-blend-mode: difference;
+    color: #fff;
+    transition: padding 0.3s ease;
+}
+
+.nav_logo span {
+    font-family: "Secondary", sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: 0.1vw;
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.nav_menu_button {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 20rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav_menu_button_circle {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 20rem;
+    background-color: var(--alternate);
+}
+
+/* Tablet - 1024px */
+@media screen and (max-width: 1024px) {
+    .nav {
+        padding: 1.5rem 3rem;
+    }
+
+    .nav_logo span {
+        font-size: clamp(1.3rem, 3.5vw, 2rem);
+    }
+
+    .nav_menu_button {
+        padding: 1.2rem 2.5rem;
+    }
+}
+
+/* Tablet/Mobile - 768px */
+@media screen and (max-width: 768px) {
+    .nav {
+        padding: 1.5rem 2rem;
+    }
+
+    .nav_logo span {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+    }
+
+    .nav_menu_button {
+        padding: 1rem 2rem;
+        gap: 0.75rem;
+    }
+
+    .nav_menu_button_circle {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    /* Hide middle text on tablet */
+    .nav > div:nth-child(2),
+    .nav > div:nth-child(3) {
+        display: none !important;
+    }
+}
+
+/* Mobile - 480px */
+@media screen and (max-width: 480px) {
+    .nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav_logo span {
+        font-size: clamp(1rem, 6vw, 1.5rem);
+        letter-spacing: 0.05em;
+    }
+
+    .nav_menu_button {
+        padding: 0.75rem 1.5rem;
+        gap: 0.5rem;
+    }
+
+    .nav_menu_button_circle {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Adjust menu button text size */
+    .nav .flex span {
+        font-size: 0.7rem;
+    }
+
+    .nav .flex .w-6 {
+        width: 1.25rem;
+        height: 0.875rem;
+    }
+
+    .nav .flex .h-0\.5 {
+        height: 1.5px;
+    }
+}
+
+/* Extra Small Mobile - 360px */
+@media screen and (max-width: 360px) {
+    .nav {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav_logo span {
+        font-size: 1.1rem;
+        letter-spacing: 0.02em;
+    }
+
+    .nav_menu_button {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .nav .flex span {
+        font-size: 0.65rem;
+    }
+
+    .nav .flex .w-6 {
+        width: 1rem;
+        height: 0.75rem;
+    }
+}
+
+/* Landscape Mobile */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    .nav {
+        padding: 0.75rem 2rem;
+    }
+
+    .nav_logo span {
+        font-size: 1.2rem;
+    }
+}
+
+/* Prevent text wrapping */
+.nav > * {
+    white-space: nowrap;
+}
+
+/* Ensure flex items don't shrink */
+.nav > div {
+    flex-shrink: 0;
+}

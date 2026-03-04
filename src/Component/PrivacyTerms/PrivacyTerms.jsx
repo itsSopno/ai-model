@@ -1,128 +1,145 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./privacy.css"
+
 const PrivacyTerms = () => {
   const [activeTab, setActiveTab] = useState("privacy");
 
   return (
-    <section className="teams w-full min-h-screen  text-white">
-      {/* HEADER SECTION */}
-      <div className="w-full border-b border-white/5 px-6 md:px-10 py-20 bg-gradient-to-b from-indigo-500/5 to-transparent">
-        <h2 className="text-indigo-500 font-black tracking-[0.4em] uppercase text-[10px] mb-4">
-          Legal Infrastructure
-        </h2>
-        <h1 className="text-5xl md:text-8xl text-[#8116e0] tracking-tighter uppercase mb-10">
-          Legal <span className="text-[#d0ff00] italic font-light">Nexus</span>
+    <section className="w-full min-h-screen bg-[#f4f4e8] text-black pt-32 pb-20 border-t border-black/10">
+      
+      {/* 1. HEADER: Industrial Blueprint Style */}
+      <div className="px-6 md:px-12 mb-20">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-[#d0ff00] font-mono text-xs font-bold uppercase tracking-[0.4em]">
+            [ Protocol — 09 ]
+          </span>
+          <div className="h-[1px] w-12 bg-[#d0ff00]/30" />
+        </div>
+        
+        <h1 className="text-3xl md:text-[90px] font-black tracking-tighter uppercase leading-[0.85] mb-12">
+          Legal <br />
+          <span className="text-[#d0ff00] italic font-light humane-font">Infrastructure.</span>
         </h1>
 
-        {/* TAB CONTROLS */}
-        <div className="flex gap-8 border-b border-white/5">
-          <button
-            onClick={() => setActiveTab("privacy")}
-            className={`pb-4 text-[10px] text-[#d0ff00] tracking-[0.2em] uppercase transition-all relative ${
-              activeTab === "privacy" ? "text-[#8116e0]" : "text-gray-600 hover:text-gray-400"
-            }`}
-          >
-            Privacy Policy
-            {activeTab === "privacy" && (
-              <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-500" />
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab("terms")}
-            className={`pb-4 text-[10px] text-[#8116e0] tracking-[0.2em] uppercase transition-all relative ${
-              activeTab === "terms" ? "text-[#d0ff00]" : "text-gray-600 hover:text-gray-400"
-            }`}
-          >
-            Terms of Service
-            {activeTab === "terms" && (
-              <motion.div layoutId="underline" className="absolute bottom-0 left-0 w-full h-[2px] bg-indigo-500" />
-            )}
-          </button>
+        {/* TAB CONTROLS: Sharp & Minimalist */}
+        <div className="flex gap-12 border-b border-white/10">
+          {["privacy", "terms"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`pb-6 text-[11px] font-black uppercase tracking-[0.3em] transition-all relative ${
+                activeTab === tab ? "text-[#d0ff00]" : "text-gray-600 hover:text-white"
+              }`}
+            >
+              {tab === "privacy" ? "Privacy Policy" : "Terms of Service"}
+              {activeTab === tab && (
+                <motion.div 
+                  layoutId="legalUnderline" 
+                  className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-[#d0ff00]" 
+                />
+              )}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* CONTENT AREA */}
-      <div className="w-full px-6 md:px-10 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
-          {/* Sidebar Info (Hidden on mobile) */}
-          <div className="hidden lg:block lg:col-span-3 space-y-8">
-            <div className="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
-              <p className="text-[9px] font-black text-indigo-500 uppercase tracking-widest mb-4">Last Updated</p>
-              <p className="text-sm text-gray-400 font-bold">January 02, 2026</p>
+      {/* 2. MAIN CONTENT GRID */}
+      <div className="px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-0 border-b border-white/10">
+        
+        {/* SIDEBAR: Metadata Table */}
+        <div className="lg:col-span-3 border-r border-black/50 pb-12 lg:pb-0 lg:pr-12">
+          <div className="sticky top-40 space-y-12">
+            <div className="space-y-4 font-mono uppercase text-[10px]">
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-gray-500">Last Revision</span>
+                <span className="text-white">Jan 02, 2026</span>
+              </div>
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-gray-500">Authority</span>
+                <span className="text-white">Global Ops</span>
+              </div>
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-gray-500">Status</span>
+                <span className="text-[#d0ff00]">Active</span>
+              </div>
             </div>
-            <div className="p-6 border border-white/5 rounded-2xl bg-white/[0.02]">
-              <p className="text-[9px] font-black text-indigo-500 uppercase tracking-widest mb-4">Compliance</p>
-              <p className="text-xs text-gray-500 leading-relaxed italic">
-                Our terms are designed to protect both the creators and consumers within the AssetVerse AI ecosystem.
-              </p>
+
+            <div className="p-6 border border-white/10 bg-white/[0.02] relative">
+               <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-relaxed italic">
+                These frameworks protect the neural sovereignty of all AssetVerse network participants.
+               </p>
+               <div className="absolute top-0 right-0 w-2 h-2 bg-[#d0ff00]" />
             </div>
           </div>
+        </div>
 
-          {/* Main Content Scroll */}
-        <div className=" lg:col-span-9 max-w-4xl">
-
-            <AnimatePresence mode="wait">
+        {/* CONTENT AREA: Large Typography & Spacing */}
+        <div className="lg:col-span-9 lg:pl-20 py-12 lg:py-0 min-h-[600px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+              className="max-w-3xl"
+            >
               {activeTab === "privacy" ? (
-                <motion.div
-                  key="privacy"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                 style={{ fontFamily: "'Asimovian', sans-serif", fontWeight: "400", fontStyle: "normal" }}
-                  className="space-y-12"
-                >
-                  <section className="">
-                    <h3 className="text-2xl text-[#d0ff00] uppercase tracking-tight mb-6">01. Data Collection</h3>
-                    <p className=" text-[#8116e0] leading-loose">
-                      At AssetVerse, we collect neural pattern metadata and user configuration logs to enhance your AI training experience. 
-                      This includes your encrypted email identity and model technical specifications. We do not sell your personal training data to third-party entities.
+                <div className="space-y-20 pb-20">
+                  <section>
+                    <h3 className="text-[10px] font-black text-[#d0ff00] uppercase tracking-[0.5em] mb-8 italic">
+                      // Section 01
+                    </h3>
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">Data Collection</h2>
+                    <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed uppercase tracking-tight">
+                      At AssetVerse, we collect <span className="text-white">Neural Pattern Metadata</span> and user configuration logs. 
+                      This ensures your digital intellectual property remains within your exclusive control.
                     </p>
                   </section>
                   <section>
-                    <h3 className="text-2xl text-[#d0ff00] uppercase tracking-tight mb-6">02. Security Protocols</h3>
-                    <p className="text-[#8116e0] leading-loose">
-                      All assets stored in our vault are protected by AES-256 encryption. Access to your purchased models is restricted via 
-                      OAuth2.0 protocols, ensuring that your digital intellectual property remains within your control.
+                    <h3 className="text-[10px] font-black text-[#d0ff00] uppercase tracking-[0.5em] mb-8 italic">
+                      // Section 02
+                    </h3>
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">Security Protocols</h2>
+                    <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed uppercase tracking-tight">
+                      All vault assets are protected by <span className="text-white">AES-256 Industrial Encryption</span>. 
+                      Access restricted via OAuth2.0 protocols.
                     </p>
                   </section>
-                </motion.div>
+                </div>
               ) : (
-                <motion.div
-                  key="terms"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="space-y-12"
-                >
+                <div className="space-y-20 pb-20">
                   <section>
-                    <h3 className="text-2xl text-[#8116e0]  uppercase tracking-tight mb-6">01. Usage Rights</h3>
-                    <p className="text-[#d0ff00] leading-loose">
-                      By publishing a model on AssetVerse, you grant us a non-exclusive license to host and distribute your AI asset. 
-                      Buyers receive a perpetual license to use the model for both commercial and personal projects unless specified otherwise.
+                    <h3 className="text-[10px] font-black text-[#d0ff00] uppercase tracking-[0.5em] mb-8 italic">
+                      // Section 01
+                    </h3>
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">Usage Rights</h2>
+                    <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed uppercase tracking-tight">
+                      Publishing a model grants a non-exclusive license. 
+                      Buyers receive <span className="text-white">Perpetual Commercial Rights</span> unless specified otherwise by the creator.
                     </p>
                   </section>
                   <section>
-                    <h3 className="text-2xl text-[#8116e0] uppercase tracking-tight mb-6">02. Liability Limitation</h3>
-                    <p className="text-[#d0ff00] leading-loose">
-                      AssetVerse provides a marketplace for AI models "as is". We are not responsible for the accuracy, outputs, or 
-                      hallucinations produced by models hosted on our platform. Users use these neural assets at their own risk.
+                    <h3 className="text-[10px] font-black text-[#d0ff00] uppercase tracking-[0.5em] mb-8 italic">
+                      // Section 02
+                    </h3>
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-8">Liability</h2>
+                    <p className="text-gray-400 text-lg md:text-xl font-medium leading-relaxed uppercase tracking-tight">
+                      AssetVerse provides neural assets <span className="text-white">"As-Is"</span>. 
+                      We are not liable for model hallucinations or logic inaccuracies.
                     </p>
                   </section>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
-          </div>
-
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
       
-      {/* FOOTER CALL TO ACTION */}
-      <div className="w-full border-t border-white/5 p-10 text-center">
-        <p className="text-[9px] font-black text-gray-600 uppercase tracking-[0.5em]">
-          End of Document — AssetVerse AI Framework
-        </p>
+      {/* 3. DOCUMENT FOOTER */}
+      <div className="w-full py-12 px-6 md:px-12 flex justify-between items-center opacity-30 font-mono text-[8px] uppercase tracking-[0.5em]">
+        <span>End of Transmission</span>
+        <span>Ref ID: AV-LEGAL-2026</span>
       </div>
     </section>
   );

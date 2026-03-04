@@ -12,7 +12,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full  text-white border-t border-white/5 pt-20 pb-10">
+    <footer className="w-full font-sans text-white border-t border-white/5 pt-20 pb-10">
       <div className="w-full px-6 md:px-16 lg:px-24">
         
         {/* MAIN FOOTER GRID */}
@@ -21,7 +21,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="space-y-6">
             <h2 className="text-2xl font-black italic tracking-tighter uppercase">
-              AI <span className="text-indigo-500">VERSE</span>
+              AI <span className="text-[#d0ff00]">MANIA</span>
             </h2>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
               The premier marketplace for high-performance neural assets. 
@@ -43,7 +43,7 @@ const Footer = () => {
 
           {/* Navigation Column */}
           <div className="space-y-6">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">Navigation</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#d0ff00]">Navigation</h4>
             <nav className="flex flex-col gap-3 text-sm font-medium text-gray-500">
               <Link to="/" className="hover:text-white transition">Home</Link>
               <Link to="/MODEL" className="hover:text-white transition">Model Hub</Link>
@@ -54,7 +54,7 @@ const Footer = () => {
 
           {/* Account Column */}
           <div className="space-y-6">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">Account</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#d0ff00]">Account</h4>
             <nav className="flex flex-col gap-3 text-sm font-medium text-gray-500">
               {user ? (
                 <>
@@ -70,7 +70,7 @@ const Footer = () => {
 
           {/* Control Column */}
           <div className="space-y-6">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500">System Preferences</h4>
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-[#d0ff00]">System Preferences</h4>
             <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl">
               <p className="text-[10px] text-gray-600 font-bold mb-4 uppercase">Toggle Neural Interface</p>
               <button

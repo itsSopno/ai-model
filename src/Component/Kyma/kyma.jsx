@@ -13,7 +13,7 @@ const KymaHero = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a0a] text-white font-sans overflow-hidden p-6 md:p-12">
+    <div className="relative min-h-screen bg-[#0a0a0a] text-white font-sans overflow-hidden p-6 md:p-12 pt-24 md:pt-32">
       
       {/* Background Grid Lines */}
       <div className="absolute inset-0 pointer-events-none">
@@ -23,30 +23,12 @@ const KymaHero = () => {
         <div className="w-full h-px bg-white/10 absolute top-1/4" />
       </div>
 
-      {/* Header Navigation */}
-      <nav className="relative z-10 flex justify-between items-center mb-24">
-        <div className="text-2xl font-black tracking-tighter">KYMA®</div>
-        <div className="hidden md:block text-[10px] tracking-[0.2em] uppercase opacity-50">
-          AI Automation Specialists
-        </div>
-        <div className="hidden md:block text-[10px] tracking-[0.2em] uppercase opacity-50">
-          San Francisco, CA 04:04 AM
-        </div>
-        <div className="flex items-center gap-2 cursor-pointer group">
-          <span className="text-[10px] uppercase font-bold">Menu</span>
-          <div className="w-6 h-4 flex flex-col justify-between">
-            <span className="w-full h-0.5 bg-white"></span>
-            <span className="w-full h-0.5 bg-white"></span>
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
         
         {/* Left Column: Text Content */}
         <motion.div 
-          className="lg:col-span-8"
+          className="lg:col-span-8 "
           variants={staggerContainer}
           initial="initial"
           animate="animate"
@@ -56,8 +38,9 @@ const KymaHero = () => {
           </motion.p>
           
           <motion.h1 variants={fadeInUp} className="text-5xl md:text-8xl font-black leading-[0.9] tracking-tight mb-8">
-            SCALE YOUR OPERATIONS <span className="text-[#c1ff00]">[10X]</span><br />
-            WITHOUT HIRING <span className="text-[#c1ff00]">[100]</span> PEOPLE.
+           BOOST YOUR SPEED<span className="text-[#c1ff00]">[10X]</span><br />
+USING AI & VIBE COODING TOOLS TO MAXIMIZE YOUR PRODUCTIVITY <span className='text-[#c1ff00]'>[100x]</span>.
+{/* SCALE YOUR OPERATIONS <span className="text-[#c1ff00]">[10X]</span><br /> WITHOUT HIRING <span className="text-[#c1ff00]">[100]</span> PEOPLE. */}
           </motion.h1>
 
           <motion.p variants={fadeInUp} className="max-w-md text-gray-400 text-lg mb-10 leading-relaxed">
@@ -77,7 +60,7 @@ const KymaHero = () => {
 
         {/* Right Column: Floating Image/Video Card */}
         <motion.div 
-          className="lg:col-span-4 self-end relative"
+          className="lg:col-span-4 relative"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -89,7 +72,7 @@ const KymaHero = () => {
             </p>
             <div className="aspect-[4/5] bg-gray-800 relative overflow-hidden group">
               <img 
-                src="https://via.placeholder.com/400x500/111/c1ff00?text=AI+VISUAL" 
+                src="https://i.pinimg.com/1200x/09/e4/0a/09e40a3f556058ae2f57ba22bce36f12.jpg" 
                 alt="AI Robot" 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
@@ -106,17 +89,19 @@ const KymaHero = () => {
       </div>
 
       {/* Bottom Branding / Social Proof */}
-      <div className="absolute bottom-12 left-12 z-10 flex flex-col gap-2">
+      <div className="mt-20 md:mt-0 md:absolute md:bottom-12 md:left-12 z-10 flex flex-col gap-2">
         <div className="flex -space-x-2">
           {[1,2,3,4].map(i => (
-            <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-600" />
+            <div key={i} className="w-8 h-8 rounded-full border-2 border-black bg-gray-700 overflow-hidden">
+                <img src={`https://i.pravatar.cc/100?img=${i}`} alt="user" className="w-full h-full object-cover" />
+            </div>
           ))}
         </div>
         <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">Trusted by 50+ Companies</p>
       </div>
 
       {/* Large Watermark Background Text */}
-      <div className="absolute -bottom-20 left-0 text-[25vw] font-black text-white/[0.03] pointer-events-none select-none">
+      <div className="absolute -bottom-20 left-0 text-[25vw] font-black text-white/[0.03] pointer-events-none select-none tracking-tighter">
         KYMA
       </div>
     </div>

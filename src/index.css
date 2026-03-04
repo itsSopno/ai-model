@@ -6,7 +6,12 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Asimovian&display=swap');
 :root{
- font-family: "Asimovian", sans-serif;
+  /* Global CSS Variables */
+  background-color: #f4f4e8;
+  --primary: #667eea;
+  --secondary: #764ba2;
+  --navbar-height: 6rem;
+  font-family: "Asimovian", sans-serif;
   font-weight: 400;
   color-scheme: dark;
 }
@@ -31,4 +36,48 @@ html.light {
     font-family: 'Asimovian', sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+@font-face {
+  font-family: 'VarentGrotesk';
+  src: url('./Font/._VarentGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'VarentGrotesk';
+  src: url('./Font/._VarentGrotesk-ExtLtIta.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+.varent-font{
+  font-family: 'VarentGrotesk', sans-serif;
+}
+@font-face {
+  font-family: "Centrion";
+  src: url(./Font2/Centrion-High.otf) format('opentype'),
+       url(./Font2/Centrion-High.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.centrion-font {
+  font-family: 'Centrion', sans-serif;
+}
+
+@font-face {
+  font-family: "CRENZO";
+  src: url("./font3/CRENZO.otf") format("opentype"),
+       url("./font3/CRENZO.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.humane-font{
+  font-family: "CRENZO", sans-serif;
 }

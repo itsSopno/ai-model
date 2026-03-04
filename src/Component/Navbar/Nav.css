@@ -1,17 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap');
-.LOGO{
-    padding-left: 5px;
-       font-family: "Roboto Slab", serif;;
-  font-weight: 400;
-  font-style: normal;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Navbar Container */
+.navbar-custom {
+  padding: 0 2rem;
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.navbar{
-      font-family: "Roboto Slab", serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 10px;
-  color: #92afcf;
+
+.navbar-scrolled {
+  padding: 0.75rem 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
-.navbar-end{
-    color: #92afcf;
+
+/* Logo Styling */
+.logo-container {
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: translateY(-1px);
+}
+
+.logo-icon {
+  position: relative;
+}
+
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #6366f1, #8b5cf6, #ec4899);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.logo-container:hover .logo-icon::after {
+  opacity: 0.3;
+}
+
+/* Navigation Links */
+.navbar-center ul li a {
+  position: relative;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-center ul li a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.navbar-center ul li a:hover::before {
+  width: 100%;
+}
+
+.navbar-center ul li a:hover {
+  color: #6366f1;
+  transform: translateY(-2px);
+}
+
+/* Custom Buttons */
+.btn-custom {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-custom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-custom:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-outline-error:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:hover {
+  transform: rotate(180deg) scale(1.1);
+}
+
+/* Mobile Dropdown Enhancements */
+.dropdown-content {
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .navbar-custom {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-custom {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-scrolled {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Dark Mode Specific Styles */
+.dark .navbar-custom {
+  color: #e5e7eb;
+}
+
+.dark .logo-container span:last-child {
+  color: #f3f4f6;
+}
+
+.dark .navbar-center ul li a {
+  color: #d1d5db;
+}
+
+.dark .navbar-center ul li a:hover {
+  color: #818cf8;
+}
+
+/* Glassmorphism Effect */
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .navbar-scrolled {
+  background: rgba(17, 24, 39, 0.8);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
+/* Smooth Animations */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }

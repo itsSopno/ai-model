@@ -3,61 +3,43 @@ import gsap from "gsap";
 
 export default function Loading({ onComplete }) {
   const loaderRef = useRef(null);
-  const textRef = useRef(null);
-  const progressRef = useRef(null);
-  const bgRef = useRef(null);
+  const percentRef = useRef(null);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    // Counter logic
     let start = 0;
-    const end = 100;
-    const duration = 2; // seconds
+    const duration = 2; 
     let startTime = null;
 
     function step(timestamp) {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      setCounter(Math.floor(progress * (end - start) + start));
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
+      setCounter(Math.floor(progress * 100));
+      if (progress < 1) window.requestAnimationFrame(step);
     }
     window.requestAnimationFrame(step);
 
     const tl = gsap.timeline({
       onComplete: () => {
-        // Exit Animation
         gsap.to(loaderRef.current, {
           y: "-100%",
-          duration: 1.2,
-          ease: [0.87, 0, 0.13, 1], // Custom Expo Ease
+          duration: 1,
+          ease: "expo.inOut",
           onComplete: onComplete,
         });
       },
     });
 
-    // Animation sequence
-    tl.fromTo(
-      textRef.current,
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power4.out", delay: 0.2 }
+    // Simple fade in and out
+    tl.fromTo(percentRef.current, 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 0.8, ease: "power4.out" }
     )
-    .to(progressRef.current, {
-      width: "100%",
-      duration: 1.5,
-      ease: "power2.inOut",
-    }, "-=0.5")
-    .to(textRef.current, {
-      letterSpacing: "0.2em",
-      duration: 1,
-      ease: "power2.inOut",
-    })
-    .to(textRef.current, {
+    .to(percentRef.current, {
       opacity: 0,
-      y: -50,
-      duration: 0.5,
-      ease: "power2.in",
+      y: -20,
+      delay: 1.2,
+      duration: 0.5
     });
 
   }, [onComplete]);
@@ -65,35 +47,40 @@ export default function Loading({ onComplete }) {
   return (
     <div
       ref={loaderRef}
-      className="fixed inset-0 w-full h-screen z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 w-full h-screen z-[9999] bg-[#080808] flex items-center justify-center overflow-hidden font-sans"
     >
-      {/* Background Subtle Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px] rounded-full" />
-
-      <div className="relative overflow-hidden mb-4">
-        <h1
-          ref={textRef}
-          className="loader-text font-black text-5xl md:text-8xl text-white tracking-tighter uppercase italic"
-        >
-          AI <span className="text-zinc-600">VERSE</span>
-        </h1>
+      {/* Background Grid - Khub halka, texture hishebe */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="h-full w-[1px] bg-white absolute left-1/4" />
+        <div className="h-full w-[1px] bg-white absolute left-1/2" />
+        <div className="h-full w-[1px] bg-white absolute left-3/4" />
       </div>
 
-      {/* Progress Section */}
-      <div className="w-64 md:w-96 h-[1px] bg-white/10 relative overflow-hidden">
-        <div 
-          ref={progressRef}
-          className="absolute top-0 left-0 h-full bg-white w-0" 
-        />
+      <div ref={percentRef} className="relative z-10 text-center">
+        {/* Progress Counter - Hero element */}
+        <div className="flex items-baseline gap-2">
+          <span className="text-[12vw] md:text-[8vw] font-black tracking-tighter text-white leading-none">
+            {counter}
+          </span>
+          <span className="text-4xl md:text-6xl font-light italic text-[#d0ff00]">
+            %
+          </span>
+        </div>
+
+        {/* Status Line - Minimalist */}
+        <div className="mt-4 overflow-hidden">
+          <p className="text-[10px] uppercase tracking-[0.6em] text-gray-500 font-bold">
+            System. <span className="text-white">Loading</span>
+          </p>
+        </div>
       </div>
 
-      <div className="mt-4 flex flex-col items-center">
-        <span className="text-[10px] uppercase tracking-[0.5em] text-zinc-500 mb-2">
-          Initializing Neural Network
+      {/* Bottom Right - Small Technical Detail */}
+      <div className="absolute bottom-10 right-10 flex items-center gap-4 opacity-20">
+        <span className="text-[8px] font-mono text-white tracking-widest uppercase">
+          Ver. 2.0.4 // Global
         </span>
-        <span className="font-mono text-sm text-white opacity-50">
-          {counter}%
-        </span>
+        <div className="w-8 h-[1px] bg-white" />
       </div>
     </div>
   );

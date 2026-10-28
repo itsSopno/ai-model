@@ -18,7 +18,7 @@
 ![Dashboard Screenshot](models.png)
 
 ---
-
+[![Architecture diagram of itssopno/ai-model](https://gitdiagram.com/itssopno/ai-model/diagram.png)](https://gitdiagram.com/itssopno/ai-model?utm_source=readme&utm_medium=picture)
 ## 🎯 Key Features
 - View AI models and their metadata in a structured dashboard
 - Add, edit, and delete AI model entries
